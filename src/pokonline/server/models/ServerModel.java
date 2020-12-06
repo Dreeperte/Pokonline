@@ -10,6 +10,8 @@ import java.net.Socket;
 public class ServerModel {
 	private ServerSocket server_socket;
 	private static int id_count = 0;
+	private static String incomingInfo = "";
+	public static Object incomingInfolock = new Object();
 	
 	public ServerModel(int port) {
 		try {
@@ -37,48 +39,58 @@ public class ServerModel {
 	
 	static class Answer implements Runnable {
 		private Socket sock;
-		private String response;
 		
-		Answer(Socket sock, String response) {
+		Answer(Socket sock) {
 			this.sock = sock;
-			this.response = response;
 		}
 		
 		@Override
 		public void run() {
 			try {
-				PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-				out.println(response);
+				while (!(incomingInfo == "")) {
+					synchronized (incomingInfolock) {
+						PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
+						out.println(incomingInfo);
+						incomingInfo = "";
+					}
+				}
 			} catch (IOException e) { e.printStackTrace(); }
 		}
 	}
 	
 	static class Responder implements Runnable {
         private Socket sock;
-        private PlayerModel players;
+        private PlayerModel player;
         
-        Responder(Socket sock, PlayerModel players) {
+        Responder(Socket sock, PlayerModel player) {
             this.sock = sock;
-            this.players = players;
+            this.player = player;
         }
 
         @Override
         public void run() {
             BufferedReader in;
             try {
-            	System.out.println(players.getName() + " is connected.");
+            	System.out.println(player.getName() + " is connected.");
             	
             	in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             	String pseudo = in.readLine();
-            	System.out.println(pseudo);
+            	
             	if (!pseudo.isEmpty())
-            		players.setName(pseudo);
+            		player.setName(pseudo);
+            	
+            	(new Thread(new Answer(sock))).start();
             	
                 while (true) {
-                    System.out.println(in.readLine());
+                	String newClientInfo = in.readLine();
+                    System.out.println(newClientInfo);
                     
-                    (new Thread(new Answer(sock, 
-                    		players.getName() + " ==> " + players.getX() + ";" + players.getY()))).start();
+                    if (newClientInfo.substring(newClientInfo.indexOf(':') + 1).equals("released")) {
+                    	System.out.println("EIGBEZIGBEZ");
+                    	synchronized (incomingInfolock) {
+                    		incomingInfolock = "Ok c'est bon je me stop";
+                    	}
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
