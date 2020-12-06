@@ -9,7 +9,6 @@ import pokonline.client.modeles.WorldModeles;
 public class WorldView {
 
 	   public static void render(WorldModeles world, Graphics g) throws SlickException {
-	    	g.clear();
 	    	for(PlayerModeles p : world.getAllPlayers()) {
 	    		PlayerView.render(p, g);
 	    	}

@@ -16,6 +16,7 @@ import org.newdawn.slick.SlickException;
 import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.Client;
 import pokonline.client.vues.PlayerView;
+import pokonline.client.vues.WorldView;
 
 public class StartingControlleur extends BasicGame{
 
@@ -39,7 +40,9 @@ public class StartingControlleur extends BasicGame{
 
 	@Override
 	public void render(GameContainer arg0, Graphics g) throws SlickException {
+    	g.clear();
 		synchronized(lock) {
+			WorldView.render(WorldControleurs.getWorld(), g);
 			PlayerView.render(this.c.getP1(), g);
 		}
 	}
@@ -47,6 +50,7 @@ public class StartingControlleur extends BasicGame{
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		this.container = container;
+		WorldControleurs.init();
 		container.setTargetFrameRate(70);
 		//Modif
 		AssetManager.loadTexture();
@@ -88,7 +92,6 @@ public class StartingControlleur extends BasicGame{
     public void keyReleased(int key, char c) {
     	synchronized(lock) {
     		this.c.getP1().setMoving(false);
-    		this.c.getP1().setInfo("released");
     	}
     }
     @Override
@@ -97,26 +100,26 @@ public class StartingControlleur extends BasicGame{
     		case Input.KEY_D:    			
     			synchronized(lock) {
     				this.c.getP1().setDirection("right");
-    				this.c.getP1().setInfo("right");
+    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
     			}
     			break;
     		case Input.KEY_Q: 
     			synchronized(lock) {
     				this.c.getP1().setDirection("left");
-    				this.c.getP1().setInfo("left");
+    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
     			}
     			break;
     		case Input.KEY_S:
     			synchronized(lock) {
     				this.c.getP1().setDirection("down");
-    				this.c.getP1().setInfo("down");
+    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
 
     			}
     			break;
     		case Input.KEY_Z:
     			synchronized(lock) {
     				this.c.getP1().setDirection("up");
-    				this.c.getP1().setInfo("up");
+    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
     			}
     			break;
 

@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import pokonline.client.controleurs.WorldControleurs;
+
 public class Client {
 	private PlayerModeles p1;
 	private static Object lock = new Object();
@@ -33,14 +35,58 @@ public class Client {
 				            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 				 
 				            String line2;
-				 
+				            
 				            while ((line2 = reader.readLine()) != null) {
+				            	String playerpseudo = "";
+				            	String x = "",y = "";
+				            	String temp = "";
 				                System.out.println(line2);
-				                if (line2.substring(0, line2.indexOf('=')).equals("position")){
+				                int i = 0;
+				                boolean coordinate = false;
+				                for(i = 0; i < line2.length();i++) {
+				                	if(line2.charAt(i) == ':') {
+				                		playerpseudo = new String(temp);
+				                		i++;
+				                		temp = "";
+				                	}
+				                	if(temp.equals("position=")) {
+				                		coordinate = true;
+				                		temp = "";
+				                		
+				                	}
+				                	
+				                	if(coordinate) {
+				                		if(line2.charAt(i) == ';') {
+				                			
+				                			x = new String(temp);
+				                			temp = "";
+				                			i++;
+				                		}
+				                	}
+				                	temp += line2.charAt(i); 
+				                }
+				                y = new String(temp);
+				                
+
+				                if(!playerpseudo.equals(p1.getName())) {
+				                	boolean found = false;
+				                	for(PlayerModeles player : WorldControleurs.getWorld().getAllPlayers()) {
+				                		if(player.getName().equals(playerpseudo)) {
+				                			found = true;
+				                			break;
+				                		}
+				                	}
+				                	if(!found) {
+			                			System.out.println("Added new player : " + playerpseudo + " X : " + x +" Y : "+y);
+			                			WorldControleurs.getWorld().getAllPlayers().add(new PlayerModeles(Integer.parseInt(x),Integer.parseInt(y),playerpseudo));
+				                	}
+				                }
+				                 
+				                /*if (line2.substring(0, line2.indexOf('=')).equals("position")){
 				                	String positionX = line2.substring(line2.indexOf('=') + 1, line2.indexOf(','));
 				                	String positionY = line2.substring(line2.indexOf(',') + 1);
 				                	System.out.println("X : " + positionX + " " + "Y : " + positionY);
-				                }
+				                }*/
 				            }
 
 							
@@ -60,7 +106,7 @@ public class Client {
 			//System.out.println(p1);
 			synchronized(lock) {
 				if(p1.isUpdate()) {
-					out.println(p1.getName() +":"+p1.getInfo());
+					out.println(p1.getName() +":position="+p1.getInfo());
 					p1.setUpdate(false);
 				}
 			}
