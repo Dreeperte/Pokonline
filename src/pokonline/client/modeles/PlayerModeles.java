@@ -22,12 +22,16 @@ public class PlayerModeles {
 	}
 	public void setX(int x) {
 		this.x = x;
+		this.setUpdate(true);
 	}
 	public int getY() {
 		return y;
+		
 	}
+	
 	public void setY(int y) {
 		this.y = y;
+		this.setUpdate(true);
 	}
 	public String getName() {
 		return name;
@@ -67,7 +71,7 @@ public class PlayerModeles {
 	}
 	public void setInfo(String info) {
 		this.info = info;
-		this.setUpdate(true);
+		//this.setUpdate(true);
 	}
 
 }

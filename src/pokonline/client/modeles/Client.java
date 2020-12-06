@@ -9,11 +9,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import pokonline.client.controleurs.StartingControlleur;
 import pokonline.client.controleurs.WorldControleurs;
 
 public class Client {
 	private PlayerModeles p1;
-	private static Object lock = new Object();
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(0,0,pname);
 
@@ -109,8 +109,9 @@ public class Client {
 		//Ecriture sur le serveur 
 		while(true) {
 			//System.out.println(p1);
-			synchronized(lock) {
-				if(p1.isUpdate() || p1.isMoving()) {
+			synchronized(StartingControlleur.lock) {
+				if(p1.isUpdate()) {
+					//System.out.println(p1.getName() +":position="+p1.getInfo());
 					out.println(p1.getName() +":position="+p1.getInfo());
 					p1.setUpdate(false);
 				}

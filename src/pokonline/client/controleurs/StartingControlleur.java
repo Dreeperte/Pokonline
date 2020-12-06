@@ -23,7 +23,7 @@ public class StartingControlleur extends BasicGame{
 	private GameContainer container;
 	private static String pname;
 	private Client c;
-	private static Object lock = new Object();
+	public static Object lock = new Object();
 	public StartingControlleur() {
 		super("Pokonline");
 		// TODO Auto-generated constructor stub
@@ -79,12 +79,14 @@ public class StartingControlleur extends BasicGame{
 			//System.out.println(this.c.getP1());
 		synchronized(lock) {
 			if(this.c.getP1().isMoving()) {
+				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
 				switch(this.c.getP1().getDirection()) {
 					case "up": this.c.getP1().setY(this.c.getP1().getY()-1); break;
 					case "down": this.c.getP1().setY(this.c.getP1().getY()+1); break;
 					case "left": this.c.getP1().setX(this.c.getP1().getX()-1); break;
 					case "right": this.c.getP1().setX(this.c.getP1().getX()+1); break;
 				}
+				
 			}
 		}
 	}
@@ -99,27 +101,27 @@ public class StartingControlleur extends BasicGame{
     	switch (key) {
     		case Input.KEY_D:    			
     			synchronized(lock) {
+    				
     				this.c.getP1().setDirection("right");
-    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
     			}
     			break;
     		case Input.KEY_Q: 
     			synchronized(lock) {
     				this.c.getP1().setDirection("left");
-    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
+    				
     			}
     			break;
     		case Input.KEY_S:
     			synchronized(lock) {
     				this.c.getP1().setDirection("down");
-    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
+    				
 
     			}
     			break;
     		case Input.KEY_Z:
     			synchronized(lock) {
     				this.c.getP1().setDirection("up");
-    				this.c.getP1().setInfo(this.c.getP1().getX()+";"+this.c.getP1().getY());
+    				
     			}
     			break;
 
