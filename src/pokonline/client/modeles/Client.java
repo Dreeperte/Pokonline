@@ -40,7 +40,7 @@ public class Client {
 				            	String playerpseudo = "";
 				            	String x = "",y = "";
 				            	String temp = "";
-				                System.out.println(line2);
+				                //System.out.println(line2);
 				                int i = 0;
 				                boolean coordinate = false;
 				                for(i = 0; i < line2.length();i++) {
@@ -110,7 +110,7 @@ public class Client {
 		while(true) {
 			//System.out.println(p1);
 			synchronized(lock) {
-				if(p1.isUpdate()) {
+				if(p1.isUpdate() || p1.isMoving()) {
 					out.println(p1.getName() +":position="+p1.getInfo());
 					p1.setUpdate(false);
 				}
