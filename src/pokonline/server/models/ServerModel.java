@@ -70,10 +70,11 @@ public class ServerModel {
             	
             	in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
             	String pseudo = in.readLine();
+            	System.out.println(pseudo);
             	if (!pseudo.isEmpty())
             		players.setName(pseudo);
             	
-                while (sock.isConnected()) {
+                while (true) {
                     System.out.println(in.readLine());
                     
                     (new Thread(new Answer(sock, 
