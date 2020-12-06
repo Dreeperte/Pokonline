@@ -73,12 +73,17 @@ public class Client {
 				                	for(PlayerModeles player : WorldControleurs.getWorld().getAllPlayers()) {
 				                		if(player.getName().equals(playerpseudo)) {
 				                			found = true;
+				                			player.setX(Integer.parseInt(x));
+				                			player.setY(Integer.parseInt(y));
 				                			break;
 				                		}
+				            
 				                	}
 				                	if(!found) {
 			                			System.out.println("Added new player : " + playerpseudo + " X : " + x +" Y : "+y);
 			                			WorldControleurs.getWorld().getAllPlayers().add(new PlayerModeles(Integer.parseInt(x),Integer.parseInt(y),playerpseudo));
+				                	}else {
+				                		
 				                	}
 				                }
 				                 
