@@ -9,7 +9,7 @@ import pokonline.client.modeles.PlayerModeles;
 public class PlayerView {
 
    public static void render(PlayerModeles player, Graphics g) throws SlickException {
-    	g.clear();
+	   g.drawString(player.getName(), player.getX(), player.getY()+20);
     	g.drawImage(player.getImage(), player.getX(), player.getY());
   
     
