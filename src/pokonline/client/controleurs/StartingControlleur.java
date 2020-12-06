@@ -80,10 +80,10 @@ public class StartingControlleur extends BasicGame{
 		synchronized(lock) {
 			if(this.c.getP1().isMoving()) {
 				switch(this.c.getP1().getDirection()) {
-					case "up": this.c.getP1().setY(this.c.getP1().getY()-1); break;
-					case "down": this.c.getP1().setY(this.c.getP1().getY()+1); break;
-					case "left": this.c.getP1().setX(this.c.getP1().getX()-1); break;
-					case "right": this.c.getP1().setX(this.c.getP1().getX()+1); break;
+					case "up": this.c.getP1().setY(this.c.getP1().getY()-this.c.getP1().getSpeed()); break;
+					case "down": this.c.getP1().setY(this.c.getP1().getY()+this.c.getP1().getSpeed()); break;
+					case "left": this.c.getP1().setX(this.c.getP1().getX()-this.c.getP1().getSpeed()); break;
+					case "right": this.c.getP1().setX(this.c.getP1().getX()+this.c.getP1().getSpeed()); break;
 				}
 				
 			}

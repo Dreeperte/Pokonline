@@ -8,6 +8,7 @@ public class PlayerModeles {
 	private Image image;
 	private String direction = "down";
 	private String info = "";
+	private int speed = 4;
 	private boolean update = false;
 	private boolean moving = false;
 	public PlayerModeles(int x, int y, String name) {
@@ -32,7 +33,7 @@ public class PlayerModeles {
 	
 	public void setY(int y) {
 		this.y = y;
-		this.setInfo(x+";" +y);
+		this.setInfo(x+";"+y);
 		this.setUpdate(true);
 	}
 	public String getName() {
@@ -74,6 +75,12 @@ public class PlayerModeles {
 	public void setInfo(String info) {
 		this.info = info;
 		//this.setUpdate(true);
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 
 }
