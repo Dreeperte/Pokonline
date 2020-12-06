@@ -22,6 +22,7 @@ public class PlayerModeles {
 	}
 	public void setX(int x) {
 		this.x = x;
+		this.setInfo(x+";" +y);
 		this.setUpdate(true);
 	}
 	public int getY() {
@@ -31,6 +32,7 @@ public class PlayerModeles {
 	
 	public void setY(int y) {
 		this.y = y;
+		this.setInfo(x+";" +y);
 		this.setUpdate(true);
 	}
 	public String getName() {
