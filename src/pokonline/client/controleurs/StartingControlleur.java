@@ -59,6 +59,10 @@ public class StartingControlleur extends BasicGame{
 
 	}
     @Override
+    public void keyReleased(int key, char c) {
+
+    }
+    @Override
     public void keyPressed(int key, char c) {
     	switch (key) {
     		case Input.KEY_D:    			
