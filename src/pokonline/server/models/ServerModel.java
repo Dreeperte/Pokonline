@@ -96,16 +96,12 @@ public class ServerModel {
         public void run() {
             try {
 				for (int i = 0; i < sockets.size(); i++) {
-					//if (id != i) {
+					if (id != i) {
 						PrintWriter out = new PrintWriter(sockets.get(i).getOutputStream(), true);
-						
-						System.out.println("Envoi à " + players.get(i).getPlayer().getName());
-						System.out.println(players.get(id).getPlayer().getName() + ":position=" +
-								players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY());
 						
 						out.println(players.get(id).getPlayer().getName() + ":position=" +
 									players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY());
-					//}
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -138,8 +134,7 @@ public class ServerModel {
             	
                 while (true) {
                 	String newClientInfo = in.readLine();
-                    System.out.println(newClientInfo);
-                    
+                	
                     if (newClientInfo.substring(newClientInfo.indexOf(':') + 1, 
                     		newClientInfo.indexOf('=')).equals("position")) {
                     	String login = newClientInfo.substring(0, newClientInfo.indexOf(':'));
@@ -149,7 +144,7 @@ public class ServerModel {
                     	synchronized (incomingInfolock) {
                     		int id = 0;
                     		for (int i = 0; i < players.size(); i++) {
-                    			if (players.get(i).getPlayer().getName() == login) {
+                    			if (players.get(i).getPlayer().getName().equals(login)) {
                     				id = i;
                     				break;
                     			}
