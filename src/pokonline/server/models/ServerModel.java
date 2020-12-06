@@ -6,26 +6,41 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import pokonline.server.controllers.PlayerController;
 
 public class ServerModel {
 	private ServerSocket server_socket;
+	static ArrayList<Socket> sockets = new ArrayList<>();
+	
 	private static int id_count = 0;
-	private static String incomingInfo = "";
+	
+	private static String incomingInfo = null;
+	
+	private static ArrayList<PlayerController> players = new ArrayList<>();
+	private static boolean notifCo = false;
+	
 	public static Object incomingInfolock = new Object();
+	public static Object playersLock = new Object();
 	
 	public ServerModel(int port) {
 		try {
 			server_socket = new ServerSocket(port);
+			(new Thread(new Answer())).start();
 			
 			Thread t = new Thread(new Runnable() {
 	            public void run() {
 	            	while (true) {
-						Socket sock;
 						try {
-							sock = server_socket.accept();
+							sockets.add(server_socket.accept());
 							
-							(new Thread(new Responder(sock, 
-									new PlayerModel(id_count, 0, 0, "Player " + id_count)))).start();
+							synchronized(playersLock) {
+								players.add(new PlayerController(
+										new PlayerModel(id_count, 0, 0, "Player " + id_count)));
+								notifCo = true;
+							}
+							(new Thread(new Responder(id_count))).start();
 							id_count++;
 						} catch (IOException e) { e.printStackTrace(); }
 					}
@@ -38,57 +53,107 @@ public class ServerModel {
 	}
 	
 	static class Answer implements Runnable {
-		private Socket sock;
-		
-		Answer(Socket sock) {
-			this.sock = sock;
-		}
-		
 		@Override
 		public void run() {
 			try {
-				while (!(incomingInfo == "")) {
+				while (true) {
+					synchronized (playersLock) {
+						
+						if (notifCo) {
+							for (int i = 0; i < players.size() - 1; i++) {
+								PrintWriter out = new PrintWriter(sockets.get(players.size() - 1).getOutputStream(), true);
+								out.println(players.get(i).getPlayer().getName() + ":position=" +
+										players.get(i).getPlayer().getX() + ";" + 
+										players.get(i).getPlayer().getY());
+							}
+							
+							notifCo = false;
+						}
+					}
+					
 					synchronized (incomingInfolock) {
-						PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-						out.println(incomingInfo);
-						incomingInfo = "";
+						if (incomingInfo != null) {
+							for (int i = 0; i < sockets.size(); i++) {
+								PrintWriter out = new PrintWriter(sockets.get(i).getOutputStream(), true);
+								out.println(incomingInfo);
+							}
+							incomingInfo = null;
+						}
 					}
 				}
 			} catch (IOException e) { e.printStackTrace(); }
 		}
 	}
 	
+	static class Updater implements Runnable {
+        private int id;
+		
+		public Updater(int id) {
+			this.id = id;
+		}
+		
+        @Override
+        public void run() {
+            try {
+				for (int i = 0; i < sockets.size(); i++) {
+					if (id != i) {
+						PrintWriter out = new PrintWriter(sockets.get(i).getOutputStream(), true);
+						out.println(players.get(id).getPlayer().getName() + ":position=" +
+									players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY());
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }   
+    }
+	
 	static class Responder implements Runnable {
-        private Socket sock;
-        private PlayerModel player;
-        
-        Responder(Socket sock, PlayerModel player) {
-            this.sock = sock;
-            this.player = player;
-        }
+        private int id;
 
+        public Responder(int id) {
+        	this.id = id;
+        }
+        
         @Override
         public void run() {
             BufferedReader in;
             try {
-            	System.out.println(player.getName() + " is connected.");
+            	System.out.println(players.get(id).getPlayer().getName() + " is connected.");
             	
-            	in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            	in = new BufferedReader(new InputStreamReader(sockets.get(
+            			players.get(id).getPlayer().getId()).getInputStream()));
             	String pseudo = in.readLine();
             	
             	if (!pseudo.isEmpty())
-            		player.setName(pseudo);
+            		players.get(id).getPlayer().setName(pseudo);
             	
-            	(new Thread(new Answer(sock))).start();
+            	incomingInfo = players.get(id).getPlayer().getName() + ":position="
+            					+ players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY();
             	
                 while (true) {
                 	String newClientInfo = in.readLine();
                     System.out.println(newClientInfo);
                     
-                    if (newClientInfo.substring(newClientInfo.indexOf(':') + 1).equals("released")) {
-                    	System.out.println("EIGBEZIGBEZ");
+                    if (newClientInfo.substring(newClientInfo.indexOf(':') + 1, 
+                    		newClientInfo.indexOf('=')).equals("position")) {
+                    	String login = newClientInfo.substring(0, newClientInfo.indexOf(':'));
+                    	int x = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf('=') + 1
+                    			, newClientInfo.indexOf(';')));
+                    	int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1));
                     	synchronized (incomingInfolock) {
-                    		incomingInfolock = "Ok c'est bon je me stop";
+                    		int id = 0;
+                    		for (int i = 0; i < players.size(); i++) {
+                    			if (players.get(i).getPlayer().getName() == login) {
+                    				id = i;
+                    				break;
+                    			}
+                    		}
+                    		
+                    		players.get(id).getPlayer().setX(x);
+                    		players.get(id).getPlayer().setY(y);
+                    		
+                    		(new Thread(new Updater(id))).start();
                     	}
                     }
                 }
