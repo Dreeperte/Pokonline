@@ -7,7 +7,9 @@ public class PlayerModeles {
 	private String name;
 	private Image image;
 	private String direction = "down";
+	private String info = "";
 	private boolean update = false;
+	private boolean moving = false;
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
 		this.y = y;
@@ -43,14 +45,29 @@ public class PlayerModeles {
 		return direction;
 	}
 	public void setDirection(String direction) {
+		
 		this.direction = direction;
-		//this.setUpdate(true);
+		
+		this.setMoving(true);
 	}
 	public boolean isUpdate() {
 		return update;
 	}
 	public void setUpdate(boolean update) {
 		this.update = update;
+	}
+	public boolean isMoving() {
+		return moving;
+	}
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+		this.setUpdate(true);
 	}
 
 }

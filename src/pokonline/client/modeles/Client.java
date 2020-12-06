@@ -11,13 +11,10 @@ import java.util.Scanner;
 
 public class Client {
 	private PlayerModeles p1;
+	private static Object lock = new Object();
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(0,0,pname);
-		try {
-			StartClient();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 
 	}
 	
@@ -39,6 +36,11 @@ public class Client {
 				 
 				            while ((line2 = reader.readLine()) != null) {
 				                System.out.println(line2);
+				                if (line2.substring(0, line2.indexOf('=')).equals("position")){
+				                	String positionX = line2.substring(line2.indexOf('=') + 1, line2.indexOf(','));
+				                	String positionY = line2.substring(line2.indexOf(',') + 1);
+				                	System.out.println("X : " + positionX + " " + "Y : " + positionY);
+				                }
 				            }
 
 							
@@ -55,9 +57,12 @@ public class Client {
 		out.println(p1.getName());
 		//Ecriture sur le serveur 
 		while(true) {
-			if(p1.isUpdate()) {
-				out.println(p1.getName() +":"+p1.getDirection());
-				p1.setUpdate(false);
+			//System.out.println(p1);
+			synchronized(lock) {
+				if(p1.isUpdate()) {
+					out.println(p1.getName() +":"+p1.getInfo());
+					p1.setUpdate(false);
+				}
 			}
 			
 		}
