@@ -20,7 +20,7 @@ import pokonline.client.vues.PlayerView;
 public class StartingControlleur extends BasicGame{
 
 	private GameContainer container;
-	private String pname;
+	private static String pname;
 	private Client c;
 	private static Object lock = new Object();
 	public StartingControlleur() {
@@ -29,9 +29,9 @@ public class StartingControlleur extends BasicGame{
 	}
 
 	public static void main(String args[]) throws SlickException {
-		//Scanner scanner = new Scanner(System.in);
-		//pname = scanner.nextLine();
-		//scanner.close();
+		Scanner scanner = new Scanner(System.in);
+		pname = scanner.nextLine();
+		scanner.close();
 		new AppGameContainer(new StartingControlleur(), 640, 480, false).start();
 		
 
@@ -50,7 +50,7 @@ public class StartingControlleur extends BasicGame{
 		container.setTargetFrameRate(70);
 		//Modif
 		AssetManager.loadTexture();
-		c = new Client("toto");
+		c = new Client(pname);
         Thread t = new Thread(new Runnable() {
             public void run() {
             	try {
