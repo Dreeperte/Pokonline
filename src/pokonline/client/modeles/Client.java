@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
+
 
 import org.newdawn.slick.GameContainer;
 
@@ -17,6 +17,7 @@ import pokonline.client.controleurs.WorldControleurs;
 public class Client {
 	private PlayerModeles p1;
 	private CameraModeles cam;
+	private boolean keypressed = false;
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(0,0,pname);
 		this.cam = new CameraModeles();
@@ -72,8 +73,8 @@ public class Client {
 				                	for(PlayerModeles player : WorldControleurs.getWorld().getAllPlayers()) {
 				                		if(player.getName().equals(playerpseudo)) {
 				                			found = true;
-				                			player.setX(Integer.parseInt(x));
-				                			player.setY(Integer.parseInt(y));
+				                			//player.setX(Integer.parseInt(x));
+				                			//player.setY(Integer.parseInt(y));
 				                			if(released) {
 				                				player.setMoving(false);
 				                			}
@@ -115,11 +116,10 @@ public class Client {
 		while(!p1.isLeave()) {
 			//System.out.println(p1);
 			synchronized(StartingControlleur.lock) {
-				if(p1.isUpdate()) {
+				if(this.isKeypressed()) {
 					//System.out.println(p1.getName() +":position="+p1.getInfo());
-					out.println(p1.getName() +":position="+p1.getInfo()+",direction="+p1.getDirection());
-					
-					p1.setUpdate(false);
+					out.println(p1.getName()+":position="+p1.getX()+";"+p1.getY() + ",direction="+p1.getDirection());
+					this.setKeypressed(false);
 				}
 				if(p1.isReleased()) {
 					out.println(p1.getName()+":"+"released");
@@ -165,6 +165,14 @@ public class Client {
 
 	public void setCam(CameraModeles cam) {
 		this.cam = cam;
+	}
+
+	public boolean isKeypressed() {
+		return keypressed;
+	}
+
+	public void setKeypressed(boolean keypressed) {
+		this.keypressed = keypressed;
 	}
 
 

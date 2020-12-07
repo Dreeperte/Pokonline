@@ -38,6 +38,27 @@ public class PlayerModeles {
 		
 	}
 	
+	public void update() {
+		   switch(this.getDirection()) {
+		   case("down"):
+			   if(this.isMoving())
+				   this.setY(this.getY()+this.getSpeed());
+			   break;
+		   case("left"):
+			   if(this.isMoving())
+				   this.setX(this.getX()-this.getSpeed());
+			   break;
+		   case("right"):
+			   if(this.isMoving())
+				   this.setX(this.getX()+this.getSpeed());
+			   break;
+		   case("up"):
+			   if(this.isMoving())
+				   this.setY(this.getY()-this.getSpeed());
+			   break;
+		   }
+	}
+	
 	public void setY(int y) {
 		this.y = y;
 		this.setInfo(x+";"+y);
@@ -107,5 +128,9 @@ public class PlayerModeles {
 	public void setReleased(boolean released) {
 		this.released = released;
 	}
+	
+	
+	
+	
 
 }

@@ -15,12 +15,12 @@ import org.newdawn.slick.SlickException;
 
 import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.Client;
-import pokonline.client.vues.PlayerView;
+
 import pokonline.client.vues.WorldView;
 
 public class StartingControlleur extends BasicGame{
 
-	private GameContainer container;
+	//private GameContainer container;
 	private static String pname;
 	private Client c;
 	public static Object lock = new Object();
@@ -48,7 +48,7 @@ public class StartingControlleur extends BasicGame{
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		this.container = container;
+		//this.container = container;
 		WorldControleurs.init();
 		container.setTargetFrameRate(70);
 		//container.setFullscreen(true);
@@ -77,8 +77,8 @@ public class StartingControlleur extends BasicGame{
 	public void update(GameContainer container, int delta) throws SlickException {
 			//System.out.println(this.c.getP1());
 		synchronized(lock) {
-			
 			this.c.updateClient(container);
+			WorldControleurs.updateplayer();
 
 		}
 	}
@@ -94,18 +94,20 @@ public class StartingControlleur extends BasicGame{
     	switch (key) {
     		case Input.KEY_D:    			
     			synchronized(lock) {
-    				
+    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("right");
     			}
     			break;
     		case Input.KEY_Q: 
     			synchronized(lock) {
+    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("left");
     				
     			}
     			break;
     		case Input.KEY_S:
     			synchronized(lock) {
+    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("down");
     				
 
@@ -113,6 +115,7 @@ public class StartingControlleur extends BasicGame{
     			break;
     		case Input.KEY_Z:
     			synchronized(lock) {
+    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("up");
     				
     			}
