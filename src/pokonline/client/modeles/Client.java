@@ -42,32 +42,29 @@ public class Client {
 				            	String playerpseudo = "";
 				            	String x = "",y = "";
 				            	String temp = "";
+				            	String direction ="";
+				            	boolean released = false;
 				                //System.out.println(line2);
 				                int i = 0;
 				                boolean coordinate = false;
-				                for(i = 0; i < line2.length();i++) {
-				                	if(line2.charAt(i) == ':') {
-				                		playerpseudo = new String(temp);
-				                		i++;
-				                		temp = "";
+				                playerpseudo = line2.substring(0,line2.indexOf(':'));
+				                if(line2.contains("position")) {
+				                	x = line2.substring(line2.indexOf('=')+1, line2.indexOf(';'));
+				                	y = line2.substring(line2.indexOf(';')+1, line2.indexOf(','));
+				                	String directiontemp = line2.substring(line2.indexOf("direction=")+10);
+				                	if(directiontemp.equals("released")) {
+				                		released = true;
 				                	}
-				                	if(temp.equals("position=")) {
-				                		coordinate = true;
-				                		temp = "";
+				                	else
+				                	{
+				                		direction = directiontemp;
+				                	}
 				                		
-				                	}
-				                	
-				                	if(coordinate) {
-				                		if(line2.charAt(i) == ';') {
-				                			
-				                			x = new String(temp);
-				                			temp = "";
-				                			i++;
-				                		}
-				                	}
-				                	temp += line2.charAt(i); 
+				      
 				                }
-				                y = new String(temp);
+				                //System.out.println(playerpseudo + " " + x + " " + y + " " + temp + " " + direction);
+				                
+
 				                
 
 				                if(!playerpseudo.equals(p1.getName())) {
@@ -77,6 +74,12 @@ public class Client {
 				                			found = true;
 				                			player.setX(Integer.parseInt(x));
 				                			player.setY(Integer.parseInt(y));
+				                			if(released) {
+				                				player.setMoving(false);
+				                			}
+				                			else {
+				                				player.setDirection(direction);
+				                			}
 				                			break;
 				                		}
 				            
@@ -114,8 +117,13 @@ public class Client {
 			synchronized(StartingControlleur.lock) {
 				if(p1.isUpdate()) {
 					//System.out.println(p1.getName() +":position="+p1.getInfo());
-					out.println(p1.getName() +":position="+p1.getInfo());
+					out.println(p1.getName() +":position="+p1.getInfo()+",direction="+p1.getDirection());
+					
 					p1.setUpdate(false);
+				}
+				if(p1.isReleased()) {
+					out.println(p1.getName()+":"+"released");
+					p1.setReleased(false);
 				}
 			}
 			
