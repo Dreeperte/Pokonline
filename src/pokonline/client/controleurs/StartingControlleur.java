@@ -33,7 +33,7 @@ public class StartingControlleur extends BasicGame{
 		Scanner scanner = new Scanner(System.in);
 		pname = scanner.nextLine();
 		scanner.close();
-		new AppGameContainer(new StartingControlleur(), 640, 480, false).start();
+		new AppGameContainer(new StartingControlleur(), 1920, 1080, false).start();
 		
 
 	}
@@ -51,7 +51,7 @@ public class StartingControlleur extends BasicGame{
 		this.container = container;
 		WorldControleurs.init();
 		container.setTargetFrameRate(70);
-		container.setFullscreen(true);
+		//container.setFullscreen(true);
 		AssetManager.loadTexture();
 		c = new Client(pname);
         Thread t = new Thread(new Runnable() {
@@ -86,6 +86,7 @@ public class StartingControlleur extends BasicGame{
     public void keyReleased(int key, char c) {
     	synchronized(lock) {
     		this.c.getP1().setMoving(false);
+    		this.c.getP1().setReleased(true);
     	}
     }
     @Override

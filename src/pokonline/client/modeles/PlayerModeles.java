@@ -15,6 +15,7 @@ public class PlayerModeles {
 	private boolean update = false;
 	private boolean moving = false;
 	private boolean leave;
+	private boolean released;
 	private Animation animation[];
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
@@ -99,6 +100,12 @@ public class PlayerModeles {
 	}
 	public void setLeave(boolean leave) {
 		this.leave = leave;
+	}
+	public boolean isReleased() {
+		return released;
+	}
+	public void setReleased(boolean released) {
+		this.released = released;
 	}
 
 }
