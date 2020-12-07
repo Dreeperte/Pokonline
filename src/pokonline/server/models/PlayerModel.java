@@ -13,6 +13,7 @@ public class PlayerModel {
         this.x = x;
         this.y = y;
         this.name = name;
+        this.direction = "released";
     }
     
     public void update() {
@@ -39,6 +40,10 @@ public class PlayerModel {
     
     public void setDirection(String direction) {
     	this.direction = direction;
+    }
+    
+    public String getDirection() {
+    	return this.direction;
     }
     
     public void setIsMoving(boolean isMoving) {

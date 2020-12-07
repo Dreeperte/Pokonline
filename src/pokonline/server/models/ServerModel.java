@@ -64,7 +64,8 @@ public class ServerModel {
 								PrintWriter out = new PrintWriter(sockets.get(players.size() - 1).getOutputStream(), true);
 								out.println(players.get(i).getPlayer().getName() + ":position=" +
 										players.get(i).getPlayer().getX() + ";" + 
-										players.get(i).getPlayer().getY());
+										players.get(i).getPlayer().getY() + ",direction="
+										+ players.get(i).getPlayer().getDirection());
 							}
 							
 							notifCo = false;
@@ -100,7 +101,8 @@ public class ServerModel {
 						PrintWriter out = new PrintWriter(sockets.get(i).getOutputStream(), true);
 						
 						out.println(players.get(id).getPlayer().getName() + ":position=" +
-									players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY());
+									players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY()
+									+ ",direction=" + players.get(id).getPlayer().getDirection());
 					}
 				}
 			} catch (IOException e) {
@@ -130,17 +132,20 @@ public class ServerModel {
             		players.get(id).getPlayer().setName(pseudo);
             	
             	incomingInfo = players.get(id).getPlayer().getName() + ":position="
-            					+ players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY();
+            					+ players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY()
+            					+ ",direction=" + players.get(id).getPlayer().getDirection();
             	
                 while (true) {
                 	String newClientInfo = in.readLine();
+                	String requestType = newClientInfo.substring(newClientInfo.indexOf(':') + 1);
                 	
-                    if (newClientInfo.substring(newClientInfo.indexOf(':') + 1, 
-                    		newClientInfo.indexOf('=')).equals("position")) {
+                    if (newClientInfo.contains("position")) {
                     	String login = newClientInfo.substring(0, newClientInfo.indexOf(':'));
                     	int x = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf('=') + 1
                     			, newClientInfo.indexOf(';')));
-                    	int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1));
+                    	int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1, newClientInfo.indexOf(',')));
+                    	String direction = newClientInfo.substring(newClientInfo.indexOf(',') + 11);
+                    	
                     	synchronized (incomingInfolock) {
                     		int id = 0;
                     		for (int i = 0; i < players.size(); i++) {
@@ -152,9 +157,16 @@ public class ServerModel {
                     		
                     		players.get(id).getPlayer().setX(x);
                     		players.get(id).getPlayer().setY(y);
+                    		players.get(id).getPlayer().setDirection(direction);
                     		
                     		(new Thread(new Updater(id))).start();
                     	}
+                    }
+                    
+                    if (requestType.contains("released")) {
+                    	players.get(id).getPlayer().setDirection("released");
+
+                		(new Thread(new Updater(id))).start();
                     }
                 }
             } catch (IOException e) {
