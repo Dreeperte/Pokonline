@@ -1,6 +1,9 @@
 package pokonline.client.modeles;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+
+import pokonline.client.controleurs.AnimationControleurs;
 
 public class PlayerModeles {
 	private int x,y;
@@ -11,10 +14,13 @@ public class PlayerModeles {
 	private int speed = 4;
 	private boolean update = false;
 	private boolean moving = false;
+	private boolean leave;
+	private Animation animation[];
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
 		this.y = y;
 		this.name = name;
+		this.animation = AnimationModeles.setAnimationP(AnimationControleurs.spritePlayer);
 		this.image = AssetManager.stone;
 		// TODO Auto-generated constructor stub
 	}
@@ -81,6 +87,18 @@ public class PlayerModeles {
 	}
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	public Animation[] getAnimation() {
+		return animation;
+	}
+	public void setAnimation(Animation[] animation) {
+		this.animation = animation;
+	}
+	public boolean isLeave() {
+		return leave;
+	}
+	public void setLeave(boolean leave) {
+		this.leave = leave;
 	}
 
 }

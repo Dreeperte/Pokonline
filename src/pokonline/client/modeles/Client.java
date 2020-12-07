@@ -9,21 +9,23 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+import org.newdawn.slick.GameContainer;
+
 import pokonline.client.controleurs.StartingControlleur;
 import pokonline.client.controleurs.WorldControleurs;
 
 public class Client {
 	private PlayerModeles p1;
+	private CameraModeles cam;
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(0,0,pname);
-
+		this.cam = new CameraModeles();
 
 	}
 	
 	public void StartClient() throws UnknownHostException, IOException {
 		
 		Socket sock = new Socket("151.80.155.244", 5015);
-		Scanner scanner = new Scanner(System.in);
 		PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
 		
 		Thread t = new Thread(new Runnable() {
@@ -107,7 +109,7 @@ public class Client {
 		
 		out.println(p1.getName());
 		//Ecriture sur le serveur 
-		while(true) {
+		while(!p1.isLeave()) {
 			//System.out.println(p1);
 			synchronized(StartingControlleur.lock) {
 				if(p1.isUpdate()) {
@@ -118,8 +120,26 @@ public class Client {
 			}
 			
 		}
+		//sock.close();
+
+
 
 		
+		
+	}
+	public void updateClient(GameContainer container) {
+		if(getP1().isMoving()) {
+			if(p1.isLeave()) {
+				container.exit();
+			}
+			switch(getP1().getDirection()) {
+				case "up": getP1().setY(getP1().getY()-getP1().getSpeed()); break;
+				case "down": getP1().setY(getP1().getY()+getP1().getSpeed()); break;
+				case "left": getP1().setX(getP1().getX()-getP1().getSpeed()); break;
+				case "right": getP1().setX(getP1().getX()+getP1().getSpeed()); break;
+			}
+			
+		}
 		
 	}
 
@@ -129,6 +149,14 @@ public class Client {
 
 	public void setP1(PlayerModeles p1) {
 		this.p1 = p1;
+	}
+
+	public CameraModeles getCam() {
+		return cam;
+	}
+
+	public void setCam(CameraModeles cam) {
+		this.cam = cam;
 	}
 
 

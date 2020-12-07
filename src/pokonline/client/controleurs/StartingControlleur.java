@@ -39,11 +39,10 @@ public class StartingControlleur extends BasicGame{
 	}
 
 	@Override
-	public void render(GameContainer arg0, Graphics g) throws SlickException {
+	public void render(GameContainer container, Graphics g) throws SlickException {
     	g.clear();
 		synchronized(lock) {
-			WorldView.render(WorldControleurs.getWorld(), g);
-			PlayerView.render(this.c.getP1(), g);
+			WorldView.render(WorldControleurs.getWorld(),this.c ,g,container);
 		}
 	}
 
@@ -52,7 +51,7 @@ public class StartingControlleur extends BasicGame{
 		this.container = container;
 		WorldControleurs.init();
 		container.setTargetFrameRate(70);
-		//Modif
+		container.setFullscreen(true);
 		AssetManager.loadTexture();
 		c = new Client(pname);
         Thread t = new Thread(new Runnable() {
@@ -75,18 +74,12 @@ public class StartingControlleur extends BasicGame{
 	}
 
 	@Override
-	public void update(GameContainer arg0, int delta) throws SlickException {
+	public void update(GameContainer container, int delta) throws SlickException {
 			//System.out.println(this.c.getP1());
 		synchronized(lock) {
-			if(this.c.getP1().isMoving()) {
-				switch(this.c.getP1().getDirection()) {
-					case "up": this.c.getP1().setY(this.c.getP1().getY()-this.c.getP1().getSpeed()); break;
-					case "down": this.c.getP1().setY(this.c.getP1().getY()+this.c.getP1().getSpeed()); break;
-					case "left": this.c.getP1().setX(this.c.getP1().getX()-this.c.getP1().getSpeed()); break;
-					case "right": this.c.getP1().setX(this.c.getP1().getX()+this.c.getP1().getSpeed()); break;
-				}
-				
-			}
+			
+			this.c.updateClient(container);
+
 		}
 	}
     @Override
@@ -120,6 +113,12 @@ public class StartingControlleur extends BasicGame{
     		case Input.KEY_Z:
     			synchronized(lock) {
     				this.c.getP1().setDirection("up");
+    				
+    			}
+    			break;
+    		case Input.KEY_ESCAPE:
+    			synchronized(lock) {
+    				this.c.getP1().setLeave(true);
     				
     			}
     			break;
