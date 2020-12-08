@@ -90,6 +90,9 @@ public class StartingControlleur extends BasicGame{
 		synchronized(lock) {
 			this.c.updateClient(container);
 			WorldControleurs.updateplayer();
+			if(this.c.getP1().isLeave()) {
+				container.exit();
+			}
 
 		}
 	}
@@ -102,41 +105,38 @@ public class StartingControlleur extends BasicGame{
     }
     @Override
     public void keyPressed(int key, char c) {
-    	switch (key) {
-    		case Input.KEY_D:    			
-    			synchronized(lock) {
-    				this.c.getP1().setDirection("right");
-    				this.c.setKeypressed(true);
-    			}
-    			break;
-    		case Input.KEY_Q: 
-    			synchronized(lock) {
-    				this.c.getP1().setDirection("left");
-    				this.c.setKeypressed(true);
-    				
-    			}
-    			break;
-    		case Input.KEY_S:
-    			synchronized(lock) {
-    				this.c.getP1().setDirection("down");
-    				this.c.setKeypressed(true);
-
-    			}
-    			break;
-    		case Input.KEY_Z:
-    			synchronized(lock) {
-    				this.c.getP1().setDirection("up");
-    				this.c.setKeypressed(true);
-    			}
-    			break;
-    		case Input.KEY_ESCAPE:
-    			synchronized(lock) {
-    				this.c.getP1().setLeave(true);
-    				
-    			}
-    			break;
-
- 
+    	synchronized(lock) {
+	    	switch (key) {
+	    		case Input.KEY_D:    
+    				if(!this.c.getP1().isMoving()) {
+    					this.c.getP1().setDirection("right");
+    					this.c.setKeypressed(true);
+    				}
+	    			break;
+	    		case Input.KEY_Q: 
+	    			if(!this.c.getP1().isMoving()) {
+	    				this.c.getP1().setDirection("left");
+	    				this.c.setKeypressed(true);
+	    			}
+	    			break;
+	    		case Input.KEY_S:
+	    			if(!this.c.getP1().isMoving()) {
+	    				this.c.getP1().setDirection("down");
+	    				this.c.setKeypressed(true);
+	    			}
+	    			break;
+	    		case Input.KEY_Z:
+	    			if(!this.c.getP1().isMoving()) {
+	    				this.c.getP1().setDirection("up");
+	    				this.c.setKeypressed(true);
+	    			}
+	    			break;
+	    		case Input.KEY_ESCAPE:
+	    				this.c.getP1().setLeave(true);
+	    			break;
+	
+	 
+	    	}
     	}
 
     }
