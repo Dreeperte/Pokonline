@@ -46,8 +46,6 @@ public class Client {
 				            	String direction ="";
 				            	boolean released = false;
 				                //System.out.println(line2);
-				                int i = 0;
-				                boolean coordinate = false;
 				                playerpseudo = line2.substring(0,line2.indexOf(':'));
 				                if(line2.contains("position")) {
 				                	x = line2.substring(line2.indexOf('=')+1, line2.indexOf(';'));
@@ -73,8 +71,8 @@ public class Client {
 				                	for(PlayerModeles player : WorldControleurs.getWorld().getAllPlayers()) {
 				                		if(player.getName().equals(playerpseudo)) {
 				                			found = true;
-				                			//player.setX(Integer.parseInt(x));
-				                			//player.setY(Integer.parseInt(y));
+				                			player.setX(Integer.parseInt(x));
+				                			player.setY(Integer.parseInt(y));
 				                			if(released) {
 				                				player.setMoving(false);
 				                			}
@@ -93,16 +91,11 @@ public class Client {
 				                	}
 				                }
 				                 
-				                /*if (line2.substring(0, line2.indexOf('=')).equals("position")){
-				                	String positionX = line2.substring(line2.indexOf('=') + 1, line2.indexOf(','));
-				                	String positionY = line2.substring(line2.indexOf(',') + 1);
-				                	System.out.println("X : " + positionX + " " + "Y : " + positionY);
-				                }*/
 				            }
 
 							
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 
