@@ -2,6 +2,7 @@ package pokonline.server.controllers;
 
 import java.util.ArrayList;
 
+import pokonline.server.models.ServerModel;
 import pokonline.server.models.WorldModel;
 
 public class WorldController implements Runnable {
@@ -13,7 +14,7 @@ public class WorldController implements Runnable {
 	private WorldModel worldModel;
 	
 	public WorldController(ArrayList<PlayerController> players) {
-		
+		this.worldModel = new WorldModel(players);
 	}
 		
 	@Override
@@ -26,7 +27,9 @@ public class WorldController implements Runnable {
 	        while (System.currentTimeMillis() > next_game_tick
 	                && loops < MAX_FRAMESKIP) {
 
-	            worldModel.update();
+	            synchronized (ServerModel.playersLock) {
+	            	worldModel.update();
+	            }
 
 	            next_game_tick += SKIP_TICKS;
 	            loops++;

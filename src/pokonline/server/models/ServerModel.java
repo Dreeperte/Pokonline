@@ -124,7 +124,6 @@ public class ServerModel {
         public void run() {
             BufferedReader in;
             try {
-            	System.out.println(players.get(id).getPlayer().getName() + " is connected.");
             	
             	in = new BufferedReader(new InputStreamReader(sockets.get(
             			players.get(id).getPlayer().getId()).getInputStream()));
@@ -141,11 +140,8 @@ public class ServerModel {
                 	String newClientInfo = in.readLine();
                 	String requestType = newClientInfo.substring(newClientInfo.indexOf(':') + 1);
                 	
-                    if (newClientInfo.contains("position")) {
+                    if (newClientInfo.contains("direction")) {
                     	String login = newClientInfo.substring(0, newClientInfo.indexOf(':'));
-                    	int x = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf('=') + 1
-                    			, newClientInfo.indexOf(';')));
-                    	int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1, newClientInfo.indexOf(',')));
                     	String direction = newClientInfo.substring(newClientInfo.indexOf(',') + 11);
                     	
                     	synchronized (incomingInfolock) {
@@ -157,18 +153,14 @@ public class ServerModel {
                     			}
                     		}
                     		
-                    		players.get(id).getPlayer().setX(x);
-                    		players.get(id).getPlayer().setY(y);
                     		players.get(id).getPlayer().setDirection(direction);
-                    		
                     		(new Thread(new Updater(id))).start();
                     	}
                     }
                     
                     if (requestType.contains("released")) {
                     	players.get(id).getPlayer().setDirection("released");
-
-                		(new Thread(new Updater(id))).start();
+                    	(new Thread(new Updater(id))).start();
                     }
                 }
             } catch (IOException e) {
