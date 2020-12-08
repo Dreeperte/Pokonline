@@ -7,7 +7,7 @@ import pokonline.server.models.WorldModel;
 
 public class WorldController implements Runnable {
 	double interpolation = 0;
-	final int TICKS_PER_SECOND = 70;
+	final int TICKS_PER_SECOND = 7;
 	final int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
 	final int MAX_FRAMESKIP = 5;
 	
@@ -16,7 +16,7 @@ public class WorldController implements Runnable {
 	public WorldController(ArrayList<PlayerController> players) {
 		this.worldModel = new WorldModel(players);
 	}
-		
+
 	@Override
 	public void run() {
 	    double next_game_tick = System.currentTimeMillis();

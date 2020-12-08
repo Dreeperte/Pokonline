@@ -28,7 +28,6 @@ public class ServerModel {
 	public ServerModel(int port) {
 		try {
 			server_socket = new ServerSocket(port);
-			(new Thread(new WorldController(players))).start();
 			(new Thread(new Answer())).start();
 			
 			Thread t = new Thread(new Runnable() {
@@ -159,7 +158,14 @@ public class ServerModel {
                     }
                     
                     if (requestType.contains("released")) {
+                    	int x = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf('=') + 1, 
+                    			newClientInfo.indexOf(';')));
+                    	int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1,
+                    			newClientInfo.indexOf(',')));
+                    	
                     	players.get(id).getPlayer().setDirection("released");
+                    	players.get(id).getPlayer().setX(x);
+                    	players.get(id).getPlayer().setY(y);
                     	(new Thread(new Updater(id))).start();
                     }
                 }
