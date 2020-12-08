@@ -3,6 +3,7 @@ package pokonline.server.models;
 public class PlayerModel {
 	private int id;
 	private int x,y;
+	private int speed = 3;
 	private String direction;
     private String name;
     
@@ -16,8 +17,8 @@ public class PlayerModel {
         this.direction = "released";
     }
     
-    public void update() {
-    	
+    public int getSpeed() {
+    	return speed;
     }
     
     public int getX() {

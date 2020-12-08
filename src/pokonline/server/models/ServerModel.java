@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import pokonline.server.controllers.PlayerController;
+import pokonline.server.controllers.WorldController;
 
 public class ServerModel {
 	private ServerSocket server_socket;
@@ -27,6 +28,7 @@ public class ServerModel {
 	public ServerModel(int port) {
 		try {
 			server_socket = new ServerSocket(port);
+			(new Thread(new WorldController(players))).start();
 			(new Thread(new Answer())).start();
 			
 			Thread t = new Thread(new Runnable() {
