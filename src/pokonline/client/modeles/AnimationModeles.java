@@ -13,7 +13,9 @@ public class AnimationModeles {
         Animation animation = new Animation();
         for (int x = startX; x < endX; x++) {
             animation.addFrame(spriteSheet.getSprite(x, y), 100);
+            
         }
+        animation.setSpeed((float)0.5);
         return animation;
     }
 	public static Animation[] setAnimationP(SpriteSheet spriteSheet) {
@@ -26,6 +28,7 @@ public class AnimationModeles {
         animations[5] = loadAnimation(spriteSheet, 1, 3, 1);
         animations[6] = loadAnimation(spriteSheet, 1, 3, 2);
         animations[7] = loadAnimation(spriteSheet, 1, 3, 3);
+        
         return animations;
 	}
 
