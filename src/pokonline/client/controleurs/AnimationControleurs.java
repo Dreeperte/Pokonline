@@ -10,7 +10,7 @@ public class AnimationControleurs {
 
 	public static  void loadSpriteSheet() {
 		try {
-			spritePlayer = new SpriteSheet("texture/playersheet.png", 17, 25);
+			spritePlayer = new SpriteSheet("texture/playersheet.png", 68, 100);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
