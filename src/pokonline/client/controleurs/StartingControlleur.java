@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import org.newdawn.slick.AppGameContainer;
+import javax.swing.JFrame;
+
+
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -33,7 +36,14 @@ public class StartingControlleur extends BasicGame{
 		Scanner scanner = new Scanner(System.in);
 		pname = scanner.nextLine();
 		scanner.close();
-		new AppGameContainer(new StartingControlleur(), 1920, 1080, false).start();
+	    JFrame frame = new JFrame();
+	    CanvasGameContainer app = new CanvasGameContainer(new StartingControlleur());
+	    frame.setUndecorated(true);
+	    frame.setVisible(true);
+	    frame.add(app);
+	    frame.setSize(1920, 1080);
+	    app.start();
+
 		
 
 	}
@@ -51,6 +61,7 @@ public class StartingControlleur extends BasicGame{
 		//this.container = container;
 		WorldControleurs.init();
 		container.setTargetFrameRate(70);
+		container.setVSync(true);
 		//container.setFullscreen(true);
 		AssetManager.loadTexture();
 		c = new Client(pname);
