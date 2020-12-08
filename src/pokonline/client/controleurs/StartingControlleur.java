@@ -105,30 +105,28 @@ public class StartingControlleur extends BasicGame{
     	switch (key) {
     		case Input.KEY_D:    			
     			synchronized(lock) {
-    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("right");
+    				this.c.setKeypressed(true);
     			}
     			break;
     		case Input.KEY_Q: 
     			synchronized(lock) {
-    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("left");
+    				this.c.setKeypressed(true);
     				
     			}
     			break;
     		case Input.KEY_S:
     			synchronized(lock) {
-    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("down");
-    				
+    				this.c.setKeypressed(true);
 
     			}
     			break;
     		case Input.KEY_Z:
     			synchronized(lock) {
-    				this.c.setKeypressed(true);
     				this.c.getP1().setDirection("up");
-    				
+    				this.c.setKeypressed(true);
     			}
     			break;
     		case Input.KEY_ESCAPE:
