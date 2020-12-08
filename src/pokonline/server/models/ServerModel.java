@@ -138,24 +138,6 @@ public class ServerModel {
                 while (true) {
                 	String newClientInfo = in.readLine();
                 	String requestType = newClientInfo.substring(newClientInfo.indexOf(':') + 1);
-                	
-                    if (newClientInfo.contains("direction")) {
-                    	String login = newClientInfo.substring(0, newClientInfo.indexOf(':'));
-                    	String direction = newClientInfo.substring(newClientInfo.indexOf(',') + 11);
-                    	
-                    	synchronized (incomingInfolock) {
-                    		int id = 0;
-                    		for (int i = 0; i < players.size(); i++) {
-                    			if (players.get(i).getPlayer().getName().equals(login)) {
-                    				id = i;
-                    				break;
-                    			}
-                    		}
-                    		
-                    		players.get(id).getPlayer().setDirection(direction);
-                    		(new Thread(new Updater(id))).start();
-                    	}
-                    }
                     
                     if (requestType.contains("released")) {
                     	int x = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf('=') + 1, 
@@ -167,6 +149,13 @@ public class ServerModel {
                     	players.get(id).getPlayer().setX(x);
                     	players.get(id).getPlayer().setY(y);
                     	(new Thread(new Updater(id))).start();
+                    } else {
+                    	String direction = newClientInfo.substring(newClientInfo.indexOf(',') + 11);
+                    	
+                    	synchronized (incomingInfolock) {
+                    		players.get(id).getPlayer().setDirection(direction);
+                    		(new Thread(new Updater(id))).start();
+                    	}
                     }
                 }
             } catch (IOException e) {
