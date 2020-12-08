@@ -115,7 +115,8 @@ public class Client {
 					this.setKeypressed(false);
 				}
 				if(p1.isReleased()) {
-					out.println(p1.getName()+":"+"released");
+					//out.println(p1.getName()+":"+"released");
+					out.println(p1.getName() +":position="+p1.getX()+";"+p1.getY()+",direction=released");
 					p1.setReleased(false);
 				}
 			}
