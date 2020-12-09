@@ -18,6 +18,7 @@ public class Client {
 	private PlayerModeles p1;
 	private CameraModeles cam;
 	private boolean keypressed = false;
+	private boolean collision = false;
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(200,200,pname);
 		this.cam = new CameraModeles();
@@ -109,12 +110,12 @@ public class Client {
 		while(!p1.isLeave()) {
 			//System.out.println(p1);
 			synchronized(StartingControlleur.lock) {
-				if(this.isKeypressed()) {
+				if(this.isKeypressed() && !this.isCollision()) {
 					//System.out.println(p1.getName() +":position="+p1.getInfo());
 					out.println(p1.getName()+":position="+p1.getX()+";"+p1.getY() + ",direction="+p1.getDirection());
 					this.setKeypressed(false);
 				}
-				if(p1.isReleased()) {
+				if(p1.isReleased() && !this.isCollision()) {
 					//out.println(p1.getName()+":"+"released");
 					out.println(p1.getName() +":position="+p1.getX()+";"+p1.getY()+",direction=released");
 					p1.setReleased(false);
@@ -167,6 +168,14 @@ public class Client {
 
 	public void setKeypressed(boolean keypressed) {
 		this.keypressed = keypressed;
+	}
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
 	}
 
 

@@ -96,8 +96,8 @@ public class StartingControlleur extends BasicGame{
 			if(this.c.getP1().isMoving()) {
 	            float futurX = getFuturX(delta);
 	            float futurY = getFuturY(delta);
-	            boolean collision = WorldControleurs.isCollision(futurX, futurY, MapControleurs.m1);
-	            if (collision) {
+	            this.c.setCollision( WorldControleurs.isCollision(futurX, futurY, MapControleurs.m1));
+	            if (c.isCollision()) {
 	            	this.c.getP1().setMoving(false);
 	            } else {
 	            	this.c.getP1().setX((int) futurX);
