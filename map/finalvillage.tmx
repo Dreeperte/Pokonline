@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="2">
  <tileset firstgid="1" source="finaltileset.tsx"/>
  <tileset firstgid="6073" source="logictileset.tsx"/>
  <layer id="1" name="Calque 1" width="30" height="30">
@@ -14,12 +14,21 @@
  </layer>
  <layer id="3" name="l3" width="30" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu2UuU7EQAyGzVXAFhxLA2zD0cAbcUkcBWfD0VDwUFwSICqg4WjgifhGM2521soq64Qmlv544njm0++RIhJjckhkCtWdD2Aeorpzsl15uhoVuUY618qBCfAD8xfpXAflPnFHz0kv5BBzIyLzaAF1UAjlevmdHhaZQW00i0KcwTpHF+iyi+vl9wjWMTpBp4n7AesTfaHvLq6X30Xu7BXeG3pP3FBbQstoBYXQOXv5jacWP5Xr5beYGDuU2/iN81gnbfTQZvxc+qlztu73hpNve+iuNDFuVK51v+P8c7Zo3UYTrEMO7630L2JZKpRr+d3l/HtOfkB7rEMO7/tOXMsviEqiyO+OQbXqRntWVq7l9zHbEQtW3WjPysq17jfb4FRQruXXCZMdo9zGbzYa14LO+b/u19VMH4ep3z5aXVtWx0TWUBP1TOAPiWY9kxAOAAA=
+   H4sIAAAAAAAECu2Vt04EQQyGh1QABbEhNIQGOh6HAyRCQWwIDQUPRZIAUR00hAbegDfhs2ZccHPWrW59S7OWvvWsd8b/2bM3G0K0sb4QxqFqv4/mAVTtU9k9d5eDIVyB9rXngkngC81v0L6W1X1kj54Sz3ixmYEQZmEO5kFMdb3qnegPYRKmYBrETtE6g3O4aNH1qvcQrSM4hpOk+4bWO3zAZ4uuV70L7FkTvRd4TboSW4QlWAYx7bNXvTFr56vqetXbWTHOUN263tiPdVyjDRvxcdfXH9651SH7vLom800bbrtW/LvQ2t9hzpxNpm7BCGPxcj+aziKGpcx6n3fIf0fme9hlLF7u90rqrtFnz/OZn1TI9H9k1bttZLHixvQsrLrW/j5kK2LAihvTs7DqWvVmC5wCqmvV6ySTpVHdut6sNa4B7fN/7a9rMQWSab0FprpOWeFbJN+j2qrpwC/VXJ5lEA4AAA==
   </data>
  </layer>
  <layer id="4" name="logic" width="30" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu1TWwrAMAjrLXb/Y+xnZ9ukFTKpqNRCxyp0PhqSGlgpNc6jlD+dtvb0JD2dLtgEsnV7fN7ZyM5ejR5uRPd6/gc8xIU91RTZupXV/m5d26MMxKo+y3dhP7I38lAtQ95jL7GRHnl6uvLfwz6iI7GWrsRn9avq9rynnbW51w9rX41fm2fpenmiOGvfKJ8Xv3W9To3hvu4zvt/jBOMJyzVlDG3OGLznmu+0zLid377P8uMGaxhavBAOAAA=
+   H4sIAAAAAAAECu1T0QrAIAj0L/b/n7GXfdsmJdxkpWGNxhJKzcPTg4iS7RvRn05ee7jTmg4nzAS9eZ/6ed8iO3s5nnAR3uP6D3i4F+Ycs/XmTV3te/HaGvVAzKqzngvzyN7Yh2Ntuo65xrbmtV7672HeyqPxNV6N7ZUjJ8dvmcVbmqX07p17Vl7v/K04a9/Wfl784vUqFcN9XWec36OE4BkrMXu00rtgsC6x1EpecMvfdR+lxwku6nriEA4AAA==
   </data>
  </layer>
+ <objectgroup id="5" name="transition" opacity="0.9" width="30" height="30">
+  <object id="1" type="switch" x="1725" y="835" width="132" height="124">
+   <properties>
+    <property name="detx" value="225"/>
+    <property name="dety" value="1360"/>
+    <property name="mapname" value="grotte1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
