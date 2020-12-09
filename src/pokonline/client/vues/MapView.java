@@ -11,5 +11,13 @@ public class MapView {
 		   map.getMap().render(0, 0, 0);	  
 
 	    }
+	   public static void renderl2(MapModeles map, Graphics g) throws SlickException {
+		   map.getMap().render(0, 0, 1);	  
+
+	    }
+	   public static void renderl3(MapModeles map, Graphics g) throws SlickException {
+		   map.getMap().render(0, 0, 2);	  
+
+	    }
 
 }

@@ -19,7 +19,7 @@ public class Client {
 	private CameraModeles cam;
 	private boolean keypressed = false;
 	public Client(String pname) {
-		this.p1 = new PlayerModeles(0,0,pname);
+		this.p1 = new PlayerModeles(200,200,pname);
 		this.cam = new CameraModeles();
 
 	}
@@ -134,12 +134,12 @@ public class Client {
 			if(p1.isLeave()) {
 				container.exit();
 			}
-			switch(getP1().getDirection()) {
+			/*switch(getP1().getDirection()) {
 				case "up": getP1().setY(getP1().getY()-getP1().getSpeed()); break;
 				case "down": getP1().setY(getP1().getY()+getP1().getSpeed()); break;
 				case "left": getP1().setX(getP1().getX()-getP1().getSpeed()); break;
 				case "right": getP1().setX(getP1().getX()+getP1().getSpeed()); break;
-			}
+			}*/
 			
 		}
 		

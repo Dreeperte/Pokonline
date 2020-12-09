@@ -93,9 +93,38 @@ public class StartingControlleur extends BasicGame{
 			if(this.c.getP1().isLeave()) {
 				container.exit();
 			}
+			if(this.c.getP1().isMoving()) {
+	            float futurX = getFuturX(delta);
+	            float futurY = getFuturY(delta);
+	            boolean collision = WorldControleurs.isCollision(futurX, futurY, MapControleurs.m1);
+	            if (collision) {
+	            	this.c.getP1().setMoving(false);
+	            } else {
+	            	this.c.getP1().setX((int) futurX);
+	            	this.c.getP1().setY((int) futurY);
+	            }
+			}
 
 		}
 	}
+    private float getFuturX(int delta){
+        float futurX = this.c.getP1().getX();
+        switch (this.c.getP1().getDirection()) {
+        case "left": futurX = this.c.getP1().getX() - this.c.getP1().getSpeed(); break;
+        case "right": futurX = this.c.getP1().getX() + this.c.getP1().getSpeed(); break;
+        }
+        return futurX;
+    }
+
+    private float getFuturY(int delta) {
+        float futurY = this.c.getP1().getY();
+        switch (this.c.getP1().getDirection()) {
+        case "up": futurY = this.c.getP1().getY() - this.c.getP1().getSpeed(); break;
+        case "down": futurY = this.c.getP1().getY() + this.c.getP1().getSpeed(); break;
+        }
+        return futurY;
+    }
+ 	
     @Override
     public void keyReleased(int key, char c) {
     	synchronized(lock) {
@@ -110,24 +139,28 @@ public class StartingControlleur extends BasicGame{
 	    		case Input.KEY_D:    
     				if(!this.c.getP1().isMoving()) {
     					this.c.getP1().setDirection("right");
+    					this.c.getP1().setMoving(true);
     					this.c.setKeypressed(true);
     				}
 	    			break;
 	    		case Input.KEY_Q: 
 	    			if(!this.c.getP1().isMoving()) {
 	    				this.c.getP1().setDirection("left");
+	    				this.c.getP1().setMoving(true);
 	    				this.c.setKeypressed(true);
 	    			}
 	    			break;
 	    		case Input.KEY_S:
 	    			if(!this.c.getP1().isMoving()) {
 	    				this.c.getP1().setDirection("down");
+	    				this.c.getP1().setMoving(true);
 	    				this.c.setKeypressed(true);
 	    			}
 	    			break;
 	    		case Input.KEY_Z:
 	    			if(!this.c.getP1().isMoving()) {
 	    				this.c.getP1().setDirection("up");
+	    				this.c.getP1().setMoving(true);
 	    				this.c.setKeypressed(true);
 	    			}
 	    			break;

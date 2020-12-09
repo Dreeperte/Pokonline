@@ -15,6 +15,8 @@ public class WorldView {
 			g.translate(container.getWidth() / 2 - (int) client.getP1().getX(), 
 	                container.getHeight() / 2 - (int) client.getP1().getY());
 		    MapView.renderl1(MapControleurs.m1, g);
+		    MapView.renderl2(MapControleurs.m1, g);
+	    	MapView.renderl3(MapControleurs.m1, g);
 	    	for(PlayerModeles p : world.getAllPlayers()) {
 	    		PlayerView.render(p, g);
 	    	}
