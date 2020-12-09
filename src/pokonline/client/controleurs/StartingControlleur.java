@@ -99,6 +99,7 @@ public class StartingControlleur extends BasicGame{
 	            this.c.setCollision( WorldControleurs.isCollision(futurX, futurY, MapControleurs.m1));
 	            if (c.isCollision()) {
 	            	this.c.getP1().setMoving(false);
+	            	this.c.getP1().setReleased(true);
 	            } else {
 	            	this.c.getP1().setX((int) futurX);
 	            	this.c.getP1().setY((int) futurY);
