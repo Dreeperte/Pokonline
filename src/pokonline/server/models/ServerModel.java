@@ -38,7 +38,7 @@ public class ServerModel {
 							
 							synchronized(playersLock) {
 								players.add(new PlayerController(
-										new PlayerModel(id_count, 0, 0, "Player " + id_count)));
+										new PlayerModel(id_count, 200, 200, "Player " + id_count)));
 								notifCo = true;
 							}
 							(new Thread(new Responder(id_count))).start();
