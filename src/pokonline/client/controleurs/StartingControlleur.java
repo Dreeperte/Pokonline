@@ -102,10 +102,8 @@ public class StartingControlleur extends BasicGame{
 	            	
 	            	
 	                if ("switch".equals(this.c.getP1().getCurrentmap().getMap().getObjectType(0, objectID))) {
-	                	System.out.println("found");
 	                	int nx = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "detx","undefined"));
 	                	int ny = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "dety","undefined"));
-	                	System.out.println("X : " +nx +" Y:  " +ny);
 	                	this.c.getP1().setX(nx); 
 	                	this.c.getP1().setY(ny);
 	                	this.c.getP1().setCurrentmap(MapControleurs.searchMap(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "mapname", "undefined")));

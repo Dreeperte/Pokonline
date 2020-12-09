@@ -56,9 +56,7 @@ public class MapModeles {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
 		String line = "";
-		boolean switcher = false;
 		try {
 			while ((line = in.readLine()) != null)
 			{	
@@ -73,19 +71,11 @@ public class MapModeles {
 				    	else {
 				    		temp += line.charAt(i);
 				    	}
-				    	
-
-
 					}
 				    temp += '>';
 				    System.out.println(temp);
 				}
-				allLines.add(temp);
-				
-				
-
-			    
-			   
+				allLines.add(temp);  
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
