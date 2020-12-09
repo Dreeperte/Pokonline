@@ -57,6 +57,7 @@ public class MapModeles {
 			e1.printStackTrace();
 		}
 		String line = "";
+		boolean needReWrite = false;
 		try {
 			while ((line = in.readLine()) != null)
 			{	
@@ -67,13 +68,14 @@ public class MapModeles {
 				    {
 				    	if(line.charAt(i) == '>') {
 				    		temp += " width=" +'"'+30+'"'+ " height="+'"'+30+'"';
+				    		needReWrite = true;
 				    	}
 				    	else {
 				    		temp += line.charAt(i);
 				    	}
 					}
 				    temp += '>';
-				    System.out.println(temp);
+				    System.out.println("Re write the file : " + path);
 				}
 				allLines.add(temp);  
 			}
@@ -86,7 +88,9 @@ public class MapModeles {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.writeIntoFiles(path, allLines);
+		if(needReWrite) {
+			this.writeIntoFiles(path, allLines);
+		}
 		
 		
 	}
