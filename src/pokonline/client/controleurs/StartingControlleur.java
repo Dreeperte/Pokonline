@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -15,10 +14,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-
 import pokonline.client.modeles.AssetManager;
+import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.Client;
-
+import pokonline.client.vues.BattleHUDView;
 import pokonline.client.vues.WorldView;
 
 public class StartingControlleur extends BasicGame{
@@ -26,6 +25,7 @@ public class StartingControlleur extends BasicGame{
 	//private GameContainer container;
 	private static String pname;
 	private Client c;
+	private BattleHUD bth;
 	public static Object lock = new Object();
 	public StartingControlleur() {
 		super("Pokonline");
@@ -54,6 +54,8 @@ public class StartingControlleur extends BasicGame{
 		synchronized(lock) {
 			WorldView.render(WorldControleurs.getWorld(),this.c ,g,container);
 		}
+		//BattleHUDView.render(bth, g, container);
+		
 	}
 
 	@Override
@@ -64,6 +66,7 @@ public class StartingControlleur extends BasicGame{
 		container.setVSync(true);
 		//container.setFullscreen(true);
 		AssetManager.loadTexture();
+		bth = new BattleHUD(container);
 		c = new Client(pname);
 		c.getP1().setCurrentmap(MapControleurs.m1);
         Thread t = new Thread(new Runnable() {
