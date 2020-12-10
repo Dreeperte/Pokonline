@@ -6,15 +6,17 @@ public class PlayerModel {
 	private int speed = 3;
 	private String direction;
     private String name;
+    private String map;
     
     private boolean isMoving = false;
     
-    public PlayerModel(int id, int x, int y, String name) {
+    public PlayerModel(int id, int x, int y, String name, String map) {
     	this.id = id;
         this.x = x;
         this.y = y;
         this.name = name;
         this.direction = "released";
+        this.map = map;
     }
     
     public int getSpeed() {
