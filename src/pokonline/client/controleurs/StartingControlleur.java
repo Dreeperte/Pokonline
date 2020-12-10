@@ -107,6 +107,7 @@ public class StartingControlleur extends BasicGame{
 	                	this.c.getP1().setX(nx); 
 	                	this.c.getP1().setY(ny);
 	                	this.c.getP1().setCurrentmap(MapControleurs.searchMap(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "mapname", "undefined")));
+	                	this.c.setSwitchMap(true);
 
 	                } 
 

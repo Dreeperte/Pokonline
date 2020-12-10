@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 
 import org.newdawn.slick.GameContainer;
 
+import pokonline.client.controleurs.MapControleurs;
 import pokonline.client.controleurs.StartingControlleur;
 import pokonline.client.controleurs.WorldControleurs;
 
@@ -19,12 +20,16 @@ public class Client {
 	private CameraModeles cam;
 	private boolean keypressed = false;
 	private boolean collision = false;
+	private boolean switchmap = false;
+	
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(200,200,pname);
 		this.cam = new CameraModeles();
 
 	}
-	
+	public void setSwitchMap(boolean switchmap) {
+		this.switchmap = switchmap;
+	}
 	public void StartClient() throws UnknownHostException, IOException {
 		
 		Socket sock = new Socket("151.80.155.244", 5015);
@@ -45,20 +50,29 @@ public class Client {
 				            	String x = "",y = "";
 				            	String temp = "";
 				            	String direction ="";
+				            	String mapswitch ="";
 				            	boolean released = false;
+				            	boolean setdirection = false;
 				                //System.out.println(line2);
 				                playerpseudo = line2.substring(0,line2.indexOf(':'));
 				                if(line2.contains("position")) {
 				                	x = line2.substring(line2.indexOf('=')+1, line2.indexOf(';'));
 				                	y = line2.substring(line2.indexOf(';')+1, line2.indexOf(','));
-				                	String directiontemp = line2.substring(line2.indexOf("direction=")+10);
-				                	if(directiontemp.equals("released")) {
-				                		released = true;
+				                	if(line2.contains("direction")) {
+				                		String directiontemp = line2.substring(line2.indexOf("direction=")+10);
+					                	if(directiontemp.equals("released")) {
+					                		released = true;
+					                	}
+					                	else
+					                	{
+					                		direction = directiontemp;
+					                		setdirection = true;
+					                	}
 				                	}
-				                	else
-				                	{
-				                		direction = directiontemp;
+				                	else if(line2.contains("transition")) {
+				                		mapswitch = line2.substring(line2.indexOf("direction=")+10);
 				                	}
+
 				                		
 				      
 				                }
@@ -77,8 +91,11 @@ public class Client {
 				                			if(released) {
 				                				player.setMoving(false);
 				                			}
-				                			else {
+				                			else if(setdirection) {
 				                				player.setDirection(direction);
+				                			}
+				                			else {
+				                				player.setCurrentmap(MapControleurs.searchMap(mapswitch));
 				                			}
 				                			break;
 				                		}
@@ -119,6 +136,10 @@ public class Client {
 					//out.println(p1.getName()+":"+"released");
 					out.println(p1.getName() +":position="+p1.getX()+";"+p1.getY()+",direction=released");
 					p1.setReleased(false);
+				}
+				if(switchmap) {
+					out.println(p1.getName()+":position="+p1.getX()+";"+p1.getY()+",transition="+p1.getCurrentmap().getName());
+					switchmap = false;
 				}
 			}
 			
