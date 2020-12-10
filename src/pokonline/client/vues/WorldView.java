@@ -18,7 +18,9 @@ public class WorldView {
 		    MapView.renderl2(client.getP1().getCurrentmap(), g);
 	    	MapView.renderl3(client.getP1().getCurrentmap(), g);
 	    	for(PlayerModeles p : world.getAllPlayers()) {
-	    		PlayerView.render(p, g);
+	    		if(p.getCurrentmap().getName().equals(client.getP1().getCurrentmap().getName())) {
+	    			PlayerView.render(p, g);
+	    		}
 	    	}
 	    	PlayerView.render(client.getP1(), g);
 

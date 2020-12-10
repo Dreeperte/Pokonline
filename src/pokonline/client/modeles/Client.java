@@ -70,7 +70,7 @@ public class Client {
 					                	}
 				                	}
 				                	else if(line2.contains("transition")) {
-				                		mapswitch = line2.substring(line2.indexOf("direction=")+10);
+				                		mapswitch = line2.substring(line2.indexOf("transition=")+11);
 				                	}
 
 				                		
