@@ -4,6 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
 import pokonline.client.controleurs.AnimationControleurs;
+import pokonline.client.controleurs.MapControleurs;
 
 public class PlayerModeles {
 	private int x,y;
@@ -24,6 +25,7 @@ public class PlayerModeles {
 		this.name = name;
 		this.animation = AnimationModeles.setAnimationP(AnimationControleurs.spritePlayer);
 		this.image = AssetManager.stone;
+		this.currentmap = MapControleurs.m1;
 		// TODO Auto-generated constructor stub
 	}
 	public int getX() {
