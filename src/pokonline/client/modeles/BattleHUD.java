@@ -2,13 +2,12 @@ package pokonline.client.modeles;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.MouseOverArea;
 
 public class BattleHUD implements ComponentListener {
-	 private static final int SPACE = 5;
+	 private static final int SPACE = 0;
     private MouseOverArea switchpoke;
     private MouseOverArea attack;
     private MouseOverArea flee;

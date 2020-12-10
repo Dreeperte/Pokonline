@@ -18,6 +18,7 @@ import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.Client;
 import pokonline.client.vues.BattleHUDView;
+import pokonline.client.vues.BattleView;
 import pokonline.client.vues.WorldView;
 
 public class StartingControlleur extends BasicGame{
@@ -54,7 +55,7 @@ public class StartingControlleur extends BasicGame{
 		synchronized(lock) {
 			WorldView.render(WorldControleurs.getWorld(),this.c ,g,container);
 		}
-		//BattleHUDView.render(bth, g, container);
+		//BattleView.render( g, container,bth);
 		
 	}
 
