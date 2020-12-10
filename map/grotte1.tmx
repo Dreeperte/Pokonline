@@ -30,7 +30,7 @@
     <property name="mapname" value="finalvillage"/>
    </properties>
   </object>
-  <object id="2" x="942" y="53" width="89" height="140">
+  <object id="2" type="switch" x="942" y="53" width="89" height="140">
    <properties>
     <property name="detx" value="983"/>
     <property name="dety" value="1680"/>
