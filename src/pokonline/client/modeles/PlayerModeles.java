@@ -16,6 +16,7 @@ public class PlayerModeles {
 	private boolean moving = false;
 	private boolean leave;
 	private boolean released;
+	private MapModeles currentmap;
 	private Animation animation[];
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
@@ -127,6 +128,12 @@ public class PlayerModeles {
 	}
 	public void setReleased(boolean released) {
 		this.released = released;
+	}
+	public MapModeles getCurrentmap() {
+		return currentmap;
+	}
+	public void setCurrentmap(MapModeles currentmap) {
+		this.currentmap = currentmap;
 	}
 	
 	

@@ -65,6 +65,7 @@ public class StartingControlleur extends BasicGame{
 		//container.setFullscreen(true);
 		AssetManager.loadTexture();
 		c = new Client(pname);
+		c.getP1().setCurrentmap(MapControleurs.m1);
         Thread t = new Thread(new Runnable() {
             public void run() {
             	try {
@@ -93,10 +94,36 @@ public class StartingControlleur extends BasicGame{
 			if(this.c.getP1().isLeave()) {
 				container.exit();
 			}
+	        for (int objectID = 0; objectID < this.c.getP1().getCurrentmap().getMap().getObjectCount(0); objectID++) {				//Detection des events sur la tiled map.
+	            if (this.c.getP1().getX() > this.c.getP1().getCurrentmap().getMap().getObjectX(0, objectID)
+	                    && this.c.getP1().getX() < this.c.getP1().getCurrentmap().getMap().getObjectX(0, objectID) + this.c.getP1().getCurrentmap().getMap().getObjectWidth(0, objectID)
+	                    && this.c.getP1().getY() > this.c.getP1().getCurrentmap().getMap().getObjectY(0, objectID)
+	                    && this.c.getP1().getY() < this.c.getP1().getCurrentmap().getMap().getObjectY(0, objectID) + this.c.getP1().getCurrentmap().getMap().getObjectHeight(0, objectID)) { //Si le joueur est dans un event
+	            	
+	            	
+	                if ("switch".equals(this.c.getP1().getCurrentmap().getMap().getObjectType(0, objectID))) {
+	                	int nx = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "detx","undefined"));
+	                	int ny = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "dety","undefined"));
+	                	this.c.getP1().setX(nx); 
+	                	this.c.getP1().setY(ny);
+	                	this.c.getP1().setCurrentmap(MapControleurs.searchMap(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "mapname", "undefined")));
+
+	                } 
+
+	            }
+	 
+
+
+
+
+
+	           
+	 
+	         }
 			if(this.c.getP1().isMoving()) {
 	            float futurX = getFuturX(delta);
 	            float futurY = getFuturY(delta);
-	            this.c.setCollision( WorldControleurs.isCollision(futurX, futurY, MapControleurs.m1));
+	            this.c.setCollision( WorldControleurs.isCollision(futurX, futurY, this.c.getP1().getCurrentmap()));
 	            if (c.isCollision()) {
 	            	this.c.getP1().setMoving(false);
 	            	this.c.getP1().setReleased(true);
