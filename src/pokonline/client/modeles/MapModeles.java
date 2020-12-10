@@ -52,7 +52,7 @@ public class MapModeles {
 		ArrayList<String> allLines = new ArrayList<>();
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader(path,StandardCharsets.UTF_8));
+			in = new BufferedReader(new FileReader(path));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
