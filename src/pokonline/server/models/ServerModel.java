@@ -157,7 +157,21 @@ public class ServerModel {
 									newClientInfo.indexOf(';')));
 							int y = Integer.parseInt(newClientInfo.substring(newClientInfo.indexOf(';') + 1,
 									newClientInfo.indexOf(',')));
-							String map = newClientInfo.substring(newClientInfo.indexOf(',') + 11);
+							String map = newClientInfo.substring(newClientInfo.indexOf(',') + 12);
+							
+							players.get(id).getPlayer().setMap(map);
+							players.get(id).getPlayer().setX(x);
+							players.get(id).getPlayer().setY(y);
+							
+							for (int i = 0; i < sockets.size(); i++) {
+								if (id != i) {
+									PrintWriter out = new PrintWriter(sockets.get(i).getOutputStream(), true);
+
+									out.println(players.get(id).getPlayer().getName() + ":position=" +
+											players.get(id).getPlayer().getX() + ";" + players.get(id).getPlayer().getY()
+											+ ",transition=" + players.get(id).getPlayer().getMap());
+								}
+							}
 							
 							System.out.println("X=" + x + ";Y=" + y + " map=" + map);
 							

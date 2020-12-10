@@ -41,6 +41,14 @@ public class PlayerModel {
     	return id;
     }
     
+    public void setMap(String map) {
+    	this.map = map;
+    }
+    
+    public String getMap() {
+    	return this.map;
+    }
+    
     public void setDirection(String direction) {
     	this.direction = direction;
     }
