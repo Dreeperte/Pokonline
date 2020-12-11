@@ -17,6 +17,7 @@ public class PlayerModeles {
 	private boolean moving = false;
 	private boolean leave;
 	private boolean released;
+	private boolean inbattle = false;
 	private MapModeles currentmap;
 	private Animation animation[];
 	public PlayerModeles(int x, int y, String name) {
@@ -136,6 +137,12 @@ public class PlayerModeles {
 	}
 	public void setCurrentmap(MapModeles currentmap) {
 		this.currentmap = currentmap;
+	}
+	public boolean isInbattle() {
+		return inbattle;
+	}
+	public void setInbattle(boolean inbattle) {
+		this.inbattle = inbattle;
 	}
 	
 	
