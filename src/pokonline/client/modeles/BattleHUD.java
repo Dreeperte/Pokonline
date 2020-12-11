@@ -6,12 +6,15 @@ import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.MouseOverArea;
 
+import pokonline.client.controleurs.MapGameState;
+
 public class BattleHUD implements ComponentListener {
 	 private static final int SPACE = 0;
     private MouseOverArea switchpoke;
     private MouseOverArea attack;
     private MouseOverArea flee;
     private MouseOverArea bag;
+    private Client c;
 	  
 	public BattleHUD(GameContainer container) {
 		this.init(container);
@@ -33,7 +36,8 @@ public class BattleHUD implements ComponentListener {
 			System.out.println("Attack !");
 		}
 		else if(source == this.flee) {
-			System.out.println("flee !");
+			this.c.getGame().enterState(MapGameState.ID);
+			//System.out.println("flee !");
 		}
 		else if(source == this.bag) {
 			System.out.println("open bag !");
@@ -64,5 +68,9 @@ public class BattleHUD implements ComponentListener {
 	public void setBag(MouseOverArea bag) {
 		this.bag = bag;
 	}
+	public void setClient(Client c) {
+		this.c = c;
+	}
+	
 
 }

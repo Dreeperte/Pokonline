@@ -3,6 +3,7 @@ package pokonline.client.controleurs;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -13,21 +14,22 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.Client;
-import pokonline.client.vues.BattleHUDView;
 import pokonline.client.vues.BattleView;
 import pokonline.client.vues.WorldView;
 
-public class StartingControlleur extends BasicGame{
+public class StartingControlleur extends StateBasedGame{
 
 	//private GameContainer container;
 	private static String pname;
 	private Client c;
 	private BattleHUD bth;
 	public static Object lock = new Object();
+	private int tick = 0;
 	public StartingControlleur() {
 		super("Pokonline");
 		// TODO Auto-generated constructor stub
@@ -48,20 +50,10 @@ public class StartingControlleur extends BasicGame{
 		
 
 	}
+ 	
 
 	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
-    	g.clear();
-		synchronized(lock) {
-			WorldView.render(WorldControleurs.getWorld(),this.c ,g,container);
-		}
-		//BattleView.render( g, container,bth);
-		
-	}
-
-	@Override
-	public void init(GameContainer container) throws SlickException {
-		//this.container = container;
+	public void initStatesList(GameContainer container) throws SlickException {
 		WorldControleurs.init();
 		container.setTargetFrameRate(70);
 		container.setVSync(true);
@@ -69,6 +61,7 @@ public class StartingControlleur extends BasicGame{
 		AssetManager.loadTexture();
 		bth = new BattleHUD(container);
 		c = new Client(pname);
+		bth.setClient(c);
 		c.getP1().setCurrentmap(MapControleurs.m1);
         Thread t = new Thread(new Runnable() {
             public void run() {
@@ -85,127 +78,11 @@ public class StartingControlleur extends BasicGame{
         
         });
         t.start();
-
-			
+        addState(new MapGameState(c,bth));
+        addState(new CombatGameState(c,bth));
+		// TODO Auto-generated method stub
+		
 	}
-
-	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
-			//System.out.println(this.c.getP1());
-		synchronized(lock) {
-			this.c.updateClient(container);
-			WorldControleurs.updateplayer();
-			if(this.c.getP1().isLeave()) {
-				container.exit();
-			}
-	        for (int objectID = 0; objectID < this.c.getP1().getCurrentmap().getMap().getObjectCount(0); objectID++) {				//Detection des events sur la tiled map.
-	            if (this.c.getP1().getX() > this.c.getP1().getCurrentmap().getMap().getObjectX(0, objectID)
-	                    && this.c.getP1().getX() < this.c.getP1().getCurrentmap().getMap().getObjectX(0, objectID) + this.c.getP1().getCurrentmap().getMap().getObjectWidth(0, objectID)
-	                    && this.c.getP1().getY() > this.c.getP1().getCurrentmap().getMap().getObjectY(0, objectID)
-	                    && this.c.getP1().getY() < this.c.getP1().getCurrentmap().getMap().getObjectY(0, objectID) + this.c.getP1().getCurrentmap().getMap().getObjectHeight(0, objectID)) { //Si le joueur est dans un event
-	            	
-	            	
-	                if ("switch".equals(this.c.getP1().getCurrentmap().getMap().getObjectType(0, objectID))) {
-	                	int nx = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "detx","undefined"));
-	                	int ny = Integer.parseInt(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "dety","undefined"));
-	                	this.c.getP1().setX(nx); 
-	                	this.c.getP1().setY(ny);
-	                	this.c.getP1().setCurrentmap(MapControleurs.searchMap(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "mapname", "undefined")));
-	                	this.c.setSwitchMap(true);
-
-	                } 
-
-	            }
-	 
-
-
-
-
-
-	           
-	 
-	         }
-			if(this.c.getP1().isMoving()) {
-	            float futurX = getFuturX(delta);
-	            float futurY = getFuturY(delta);
-	            this.c.setCollision( WorldControleurs.isCollision(futurX, futurY, this.c.getP1().getCurrentmap()));
-	            if (c.isCollision()) {
-	            	this.c.getP1().setMoving(false);
-	            	this.c.getP1().setReleased(true);
-	            } else {
-	            	this.c.getP1().setX((int) futurX);
-	            	this.c.getP1().setY((int) futurY);
-	            }
-			}
-
-		}
-	}
-    private float getFuturX(int delta){
-        float futurX = this.c.getP1().getX();
-        switch (this.c.getP1().getDirection()) {
-        case "left": futurX = this.c.getP1().getX() - this.c.getP1().getSpeed(); break;
-        case "right": futurX = this.c.getP1().getX() + this.c.getP1().getSpeed(); break;
-        }
-        return futurX;
-    }
-
-    private float getFuturY(int delta) {
-        float futurY = this.c.getP1().getY();
-        switch (this.c.getP1().getDirection()) {
-        case "up": futurY = this.c.getP1().getY() - this.c.getP1().getSpeed(); break;
-        case "down": futurY = this.c.getP1().getY() + this.c.getP1().getSpeed(); break;
-        }
-        return futurY;
-    }
- 	
-    @Override
-    public void keyReleased(int key, char c) {
-    	synchronized(lock) {
-    		this.c.getP1().setMoving(false);
-    		this.c.getP1().setReleased(true);
-    	}
-    }
-    @Override
-    public void keyPressed(int key, char c) {
-    	synchronized(lock) {
-	    	switch (key) {
-	    		case Input.KEY_D:    
-    				if(!this.c.getP1().isMoving()) {
-    					this.c.getP1().setDirection("right");
-    					this.c.getP1().setMoving(true);
-    					this.c.setKeypressed(true);
-    				}
-	    			break;
-	    		case Input.KEY_Q: 
-	    			if(!this.c.getP1().isMoving()) {
-	    				this.c.getP1().setDirection("left");
-	    				this.c.getP1().setMoving(true);
-	    				this.c.setKeypressed(true);
-	    			}
-	    			break;
-	    		case Input.KEY_S:
-	    			if(!this.c.getP1().isMoving()) {
-	    				this.c.getP1().setDirection("down");
-	    				this.c.getP1().setMoving(true);
-	    				this.c.setKeypressed(true);
-	    			}
-	    			break;
-	    		case Input.KEY_Z:
-	    			if(!this.c.getP1().isMoving()) {
-	    				this.c.getP1().setDirection("up");
-	    				this.c.getP1().setMoving(true);
-	    				this.c.setKeypressed(true);
-	    			}
-	    			break;
-	    		case Input.KEY_ESCAPE:
-	    				this.c.getP1().setLeave(true);
-	    			break;
-	
-	 
-	    	}
-    	}
-
-    }
 
 
 }

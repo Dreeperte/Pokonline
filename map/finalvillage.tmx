@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="3">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="3">
  <tileset firstgid="1" source="finaltileset.tsx"/>
  <tileset firstgid="6073" source="logictileset.tsx"/>
+ <tileset firstgid="6098" source="tilesetcounter.tsx"/>
  <layer id="1" name="Calque 1" width="30" height="30">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAECmNiYGBgGsWjYTCaBkbTwGgaGE0Do2lgNA2MpoHRNDCaBoZ1GpjJwcAwC4hnAzGp7X9cenGJw8wHyX9CwqTYDXIrsl4QH4ZxiWOTh6mFyRGiYepHCg0AeEg3DxAOAAA=
@@ -9,7 +10,7 @@
  </layer>
  <layer id="2" name="l2" width="30" height="30">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu2UUQoAIAhDO2n3P0b5IY6I6EMXwYRolPlwVK0p3IE+hQ1mOBNnFh+Zr/tm9Wwc9c10Wyw5EA7g24vVeoVc1l+3Ml9yGexdv+LW3e3V7xsSnrnJz8hBpuuMuqcazsH5lJ+1hzzTCjnwkwMDAJDGXBAOAAA=
+   H4sIAAAAAAAECu2TQQrAIAwE84v+/0t9UclhYcAeetC1wgZkg2gmWbEqIQfuq6qXM8Skuvhk7p7bNXNzMrfT7bD+6oD+gbM/MaUutnhSB1cs6i5u97A6OCfzcNc4QI+/vi/vrOlqrEqm8vHU3B1xqHMJ79XI6zwRB05y4AHGDKoREA4AAA==
   </data>
  </layer>
  <layer id="3" name="l3" width="30" height="30">

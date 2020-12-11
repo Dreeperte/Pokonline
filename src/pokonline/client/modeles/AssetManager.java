@@ -25,7 +25,7 @@ public class AssetManager {
     	try {
 			grass = new Image("texture/Grass.png");
 			stone = new Image("texture/Stone.png");
-			Font font = new Font("font/Pokemon_GB.ttf", Font.BOLD, 32);
+			Font font = new Font("font/Pokemon_GB.ttf", Font.BOLD, 16);
 			ttf = new TrueTypeFont(font, true);
 			AnimationControleurs.loadSpriteSheet();
 		} catch (SlickException e) {
