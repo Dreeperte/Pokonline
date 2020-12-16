@@ -1,22 +1,22 @@
 package pokonline.client.modeles;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 import pokonline.client.controleurs.MapControleurs;
+import pokonline.client.pokemon.pokemon;
 
 public class MapModeles {
 	private boolean encounter;
 	private TiledMap map;
 	private String name;
+	private ArrayList<pokemon> pkmns = new ArrayList<>();
 	public MapModeles(String filemapname,String name,boolean encounter) {
 		this.encounter = encounter;
 		try {
@@ -115,6 +115,15 @@ public class MapModeles {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public ArrayList<pokemon> getPkmns() {
+		return pkmns;
+	}
+	public void setPkmns(ArrayList<pokemon> pkmns) {
+		this.pkmns = pkmns;
+	}
+	public void addPkmns(pokemon pkmn) {
+		this.pkmns.add(pkmn);
 	}
 
 }

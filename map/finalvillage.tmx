@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="3">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="3">
  <tileset firstgid="1" source="finaltileset.tsx"/>
  <tileset firstgid="6073" source="logictileset.tsx"/>
  <tileset firstgid="6098" source="tilesetcounter.tsx"/>
- <layer id="1" name="Calque 1" width="30" height="30">
+ <layer id="1" name="Calque 1" width="40" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECmNiYGBgGsWjYTCaBkbTwGgaGE0Do2lgNA2MpoHRNDCaBoZ1GpjJwcAwC4hnAzGp7X9cenGJw8wHyX9CwqTYDXIrsl4QH4ZxiWOTh6mFyRGiYepHCg0AeEg3DxAOAAA=
+   H4sIAAAAAAAECu2UQQqAMAwEgyf/f1N/6QtskEAPDW5RLJQphGITzHbY1IwFAQj0EFhK8YhQNY7Q5j3Vhb62f+DX5qL6BX7wcw+ofvm6Dv+9Yw8/+DG/uQeYj5yN8pbDD368L7kHmI+bzbaa7SWOEsq7EjU9/LIe2Xn08PxZRY9GVZ/fve7h3xHZeSsftZF72lV98d+/91n0qfegDgKzE7gAOlKxwgAZAAA=
   </data>
  </layer>
- <layer id="2" name="l2" width="30" height="30">
+ <layer id="2" name="l2" width="40" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu2TQQrAIAwE84v+/0t9UclhYcAeetC1wgZkg2gmWbEqIQfuq6qXM8Skuvhk7p7bNXNzMrfT7bD+6oD+gbM/MaUutnhSB1cs6i5u97A6OCfzcNc4QI+/vi/vrOlqrEqm8vHU3B1xqHMJ79XI6zwRB05y4AHGDKoREA4AAA==
+   H4sIAAAAAAAECu3UAQqDMAwF0OAldv8r7USuk8CnTJPUz0dYCtK4avr4HW5mtpGvT7vvYPftfvyz6kzrmfr/Wz1nz0rt8v0YvvfLbFyq8ct8trfbcD57lvV7xTf2RJsix6pPbVzxKY2rPpXxjm82jnv2uOtje+Z+7ZsTqd2r8/PvZ1ap9LnN54yxfUdKnhnOT8oPXVhHRtX5ognr9kUJHOuYGdbR26rzdQfaRh2Nig97R31Z61kf2rxmGa76ZHzuwfmqJ3NtxcfcP9NrNmbe6Wc6gU6gE+gE/juBHRrMzzIAGQAA
   </data>
  </layer>
- <layer id="3" name="l3" width="30" height="30">
+ <layer id="3" name="l3" width="40" height="40">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu2Vt04EQQyGh1QABbEhNIQGOh6HAyRCQWwIDQUPRZIAUR00hAbegDfhs2ZccHPWrW59S7OWvvWsd8b/2bM3G0K0sb4QxqFqv4/mAVTtU9k9d5eDIVyB9rXngkngC81v0L6W1X1kj54Sz3ixmYEQZmEO5kFMdb3qnegPYRKmYBrETtE6g3O4aNH1qvcQrSM4hpOk+4bWO3zAZ4uuV70L7FkTvRd4TboSW4QlWAYx7bNXvTFr56vqetXbWTHOUN263tiPdVyjDRvxcdfXH9651SH7vLom800bbrtW/LvQ2t9hzpxNpm7BCGPxcj+aziKGpcx6n3fIf0fme9hlLF7u90rqrtFnz/OZn1TI9H9k1bttZLHixvQsrLrW/j5kK2LAihvTs7DqWvVmC5wCqmvV6ySTpVHdut6sNa4B7fN/7a9rMQWSab0FprpOWeFbJN+j2qrpwC/VXJ5lEA4AAA==
+   H4sIAAAAAAAECu2Wt04EMRCGhyQRCo7QEBpCAx2PQziJUBAbQgMSDwI8BUkCRAU0hAbegFfgCfhHt5bQ2p7d4bx3LjzSf+Ods8af/vWut9ZBNAjVHHkTtS0o1uzjjqUeq2+GKxaffByGM9bs446lHqtvhotaFMfdRKfQiUOu9565fy3Co09wfXkkvX+b5bvHu/0h0yMyx1gX0Tg0AU1CHBJflf4NdRINQyPQKMSxD6YD6BA6KsFXpX/bYNqBdqG9jO8VTG/QO/RRgq9K/6awp57A9Qy9ZHxcm4ZmoFmIQ7q/VfrXWL34V+Kr0r9issYMiS/5V+xiKP8WsdSSQ8vFCOKMbzw78z1uafbfJVa5cuhaXL38n/yI56XZf304A1bQow71Y8yZrweyswHDf0eey1xr/FsDxw0IbqF1jDnz9UaTfAuAacf5C/RSIT0fGv9WPav56p7pVlni0+y/O6tzo+Cre6ZbZYlP45/VOFBB4tP4FwjHaiPxJf8su6xC8s+yRFWQ/DPnyN+sah5gssR33kt0AZ1BZhxgSVWLOc+3C3/T/IArL1XzgJPZn7zybHzdrnCxuGqh+Ezvsv3M/JTtPZ08SZ649sAvsaw6MAAZAAA=
   </data>
  </layer>
- <layer id="4" name="logic" width="30" height="30">
+ <layer id="4" name="logic" width="40" height="40" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAECu1T0QrAIAj0L/b/n7GXfdsmJdxkpWGNxhJKzcPTg4iS7RvRn05ee7jTmg4nzAS9eZ/6ed8iO3s5nnAR3uP6D3i4F+Ycs/XmTV3te/HaGvVAzKqzngvzyN7Yh2Ntuo65xrbmtV7672HeyqPxNV6N7ZUjJ8dvmcVbmqX07p17Vl7v/K04a9/Wfl784vUqFcN9XWec36OE4BkrMXu00rtgsC6x1EpecMvfdR+lxwku6nriEA4AAA==
+   H4sIAAAAAAAECu2UUQoCMQxE9xbe/xj+eDYNy4NYOm4mSkFoYXfa9CWTDehx7LUnsCfQmcD9dhwrn2qPK3vKXm5/Vf5bjh6rdVy+Wldxrp/LX/nmeuzRyM17VSvHXT7n5j110Lhjj+ZYzv20z7mfuKu7x+v3n5/g8zn2sVw/lz9d+m/Xz+X7nZ2Zrp/L7/7eJ/Cv86Pvmb5/oXeiXjVL8cRnWq2tuKhZXfiP/Pjflc8j655/0Z/rWeXVPFS+y6s61bjrp/iIz5aKz9hZTPnN2IgpXvWh4qr+GFd+I8fZ5cnrquvn8t2+yHP9XB6frrp+Lt/tizzXz+Xx6arr5/Ldvshz/VweH5T80MqCr7Aw5IweKj7Lg+VOaZUjH3614n+lq/vC76ov7uFXK/5b9wT2BGoTeAJq6KwMABkAAA==
   </data>
  </layer>
  <objectgroup id="5" name="transition" opacity="0.9" width="30" height="30">
-  <object id="1" type="switch" x="1725" y="830" width="132" height="129">
+  <object id="1" type="switch" x="2045" y="1150" width="132" height="129">
    <properties>
     <property name="detx" value="225"/>
     <property name="dety" value="1360"/>
     <property name="mapname" value="grotte1"/>
    </properties>
   </object>
-  <object id="2" type="switch" x="1534" y="467" width="64" height="49">
+  <object id="2" type="switch" x="1854" y="787" width="64" height="49">
    <properties>
     <property name="detx" value="638"/>
     <property name="dety" value="595"/>

@@ -9,23 +9,24 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-
-
 import pokonline.client.modeles.BattleHUD;
+import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
 import pokonline.client.vues.WorldView;
 
 public class MapGameState extends BasicGameState{
 	private Client c;
 	private BattleHUD bth;
+	private BattleModel bm;
 	public static Object lock = new Object();
 	private int tick = 0;
 	public static int ID= 0;
 
-	public MapGameState(Client c,BattleHUD bth) 
+	public MapGameState(Client c,BattleHUD bth, BattleModel bm) 
 	{
 		this.bth = bth;
 		this.c = c;
+		this.bm = bm;
 		
 	}
 
@@ -68,6 +69,7 @@ public class MapGameState extends BasicGameState{
 	                	this.c.getP1().setX(nx); 
 	                	this.c.getP1().setY(ny);
 	                	this.c.getP1().setCurrentmap(MapControleurs.searchMap(this.c.getP1().getCurrentmap().getMap().getObjectProperty(0, objectID, "mapname", "undefined")));
+	                	this.bm.setMap(this.c.getP1().getCurrentmap());
 	                	this.c.setSwitchMap(true);
 
 	                } 
@@ -88,14 +90,17 @@ public class MapGameState extends BasicGameState{
 			if(this.c.getP1().isMoving()) {
 	            float futurX = getFuturX(delta);
 	            float futurY = getFuturY(delta);
+	           
 	            if(WorldControleurs.isCollision2(this.c.getP1().getX(), this.c.getP1().getY(), this.c,this.c.getP1().getCurrentmap())) {
 	                Random rand = new Random(); //instance of random class
 	                int upperbound = 1000;
 	                int int_random = rand.nextInt(upperbound);
 	                if(int_random < 10) {
+	                	int index = (int) (Math.random()*(this.c.getP1().getCurrentmap().getPkmns().size()));
+	                	this.bm.setPkmn(this.c.getP1().getCurrentmap().getPkmns().get(index));
 	                	this.c.getGame().enterState(CombatGameState.ID);
 	                	//this.c.getP1().setInbattle(true);
-	                	//this.c.getP1().setMoving(false);
+	                	this.c.getP1().setMoving(false);
 	                	//System.out.println("BATTLE!");
 	                }
 		        }

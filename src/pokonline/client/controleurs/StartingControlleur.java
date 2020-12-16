@@ -3,24 +3,19 @@ package pokonline.client.controleurs;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
+import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
-import pokonline.client.vues.BattleView;
-import pokonline.client.vues.WorldView;
 
 public class StartingControlleur extends StateBasedGame{
 
@@ -30,6 +25,7 @@ public class StartingControlleur extends StateBasedGame{
 	private BattleHUD bth;
 	public static Object lock = new Object();
 	private int tick = 0;
+	private BattleModel bm; 
 	public StartingControlleur() {
 		super("Pokonline");
 		// TODO Auto-generated constructor stub
@@ -63,6 +59,9 @@ public class StartingControlleur extends StateBasedGame{
 		c = new Client(pname);
 		bth.setClient(c);
 		c.getP1().setCurrentmap(MapControleurs.m1);
+		MapControleurs.initMap();
+		bm  = new BattleModel(c.getP1().getCurrentmap());
+		c.getP1().addPkmns(AssetManager.bpkmnVenusaur);
         Thread t = new Thread(new Runnable() {
             public void run() {
             	try {
@@ -78,8 +77,8 @@ public class StartingControlleur extends StateBasedGame{
         
         });
         t.start();
-        addState(new MapGameState(c,bth));
-        addState(new CombatGameState(c,bth));
+        addState(new MapGameState(c,bth,bm));
+        addState(new CombatGameState(c,bth,bm));
 		// TODO Auto-generated method stub
 		
 	}
