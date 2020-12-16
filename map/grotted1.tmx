@@ -23,7 +23,7 @@
    H4sIAAAAAAAECu1U0QoDMQjr3+2b7+82GYEgNU67cn24wtAz0Wgedr3GuA75jc/71y6VWRVutl82y/Ddb7YjaxqunsIzzGsrnQp2l67a0d/KO3KOGbPaLxg4iEoXHI5Kl3mznHururN5ndpJurNddtc6nq304J7ODOvtvhXdrqb1VXSz+zKc96zoct9qfppuxbPO7TvvVbtXdcH3M6N65AX4Ee7r4D+69f8C75n3lr8fn79uRD6wV5yDzzWVg2+RX1RnDufgc03l4CMaFzmi6gcG7h3xDZseLDUQDgAA
   </data>
  </layer>
- <objectgroup id="5" name="transition">
+ <objectgroup id="5" name="transition" width="30" height="30">
   <object id="1" type="switch" x="945" y="1782" width="93" height="80">
    <properties>
     <property name="detx" value="1012"/>
