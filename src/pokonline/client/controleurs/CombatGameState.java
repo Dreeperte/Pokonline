@@ -7,16 +7,19 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import pokonline.client.modeles.BattleHUD;
+import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
 import pokonline.client.vues.BattleView;
 
 public class CombatGameState extends BasicGameState{
 	private BattleHUD bth;
+	private BattleModel bm;
 	private Client c;
 	public static int ID= 1;
-	public CombatGameState(Client c, BattleHUD bth) {
+	public CombatGameState(Client c, BattleHUD bth, BattleModel bm) {
 		this.c = c;
 		this.bth = bth;
+		this.bm = bm;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,7 +33,7 @@ public class CombatGameState extends BasicGameState{
 
 	@Override
 	public void render(GameContainer container, StateBasedGame arg1, Graphics g) throws SlickException {
-		BattleView.render( g, container,bth);
+		BattleView.render( g, container,bth,bm,this.c.getP1());
 		
 	}
 

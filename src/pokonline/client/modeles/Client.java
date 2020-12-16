@@ -25,7 +25,7 @@ public class Client {
 	private boolean l2 = false;
 	private StateBasedGame game;
 	public Client(String pname) {
-		this.p1 = new PlayerModeles(200,200,pname);
+		this.p1 = new PlayerModeles(600,600,pname);
 		this.cam = new CameraModeles();
 
 	}
