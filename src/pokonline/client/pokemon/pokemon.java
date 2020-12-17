@@ -30,10 +30,10 @@ public class pokemon implements Cloneable{
 		this.name = b.name();
 		this.hp = (int)real_Stats().HP();
 		this.maxhp = (int)real_Stats().HP();
-		
 		back = AssetManager.loadImage("texture/pokemon/" + b.name() + "Back.png");
+		back.setFilter(Image.FILTER_NEAREST);
 		front = AssetManager.loadImage("texture/pokemon/" + b.name() + "Front.png");
-		
+		front.setFilter(Image.FILTER_NEAREST);
 		if (b.havesex())
 			sexe=new sexe((int)Math.random()%2);
 		expnLVL();

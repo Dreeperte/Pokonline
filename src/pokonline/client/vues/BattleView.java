@@ -17,8 +17,10 @@ public class BattleView {
 		g.resetTransform();
 		g.drawImage(img,0,0);
 		BattleHUDView.render(bth, g, container);
-		g.drawImage(bm.getPkmn().getFront(), x-(bm.getPkmn().getFront().getWidth()/2), y-(bm.getPkmn().getFront().getHeight()));
-		g.drawImage(p1.getPkmns().get(0).getBack(), 0, 896-p1.getPkmns().get(0).getBack().getHeight());
+		Image front = bm.getPkmn().getFront().getScaledCopy(8);
+		Image back = p1.getPkmns().get(0).getBack().getScaledCopy(8);
+		g.drawImage(front, x-(front.getWidth()/2), y-(front.getHeight()));
+		g.drawImage(back, 0, 896-back.getHeight());
 		PokemonHudView.renderEnemy(bm.getPkmn(), g, container);
 		PokemonHudView.renderAlly(p1.getPkmns().get(0), g, container);
 	}
