@@ -15,7 +15,7 @@ public class CombatGameState extends BasicGameState{
 	private BattleHUD bth;
 	private BattleModel bm;
 	private Client c;
-	public static int ID= 1;
+	public static int ID= 2;
 	public CombatGameState(Client c, BattleHUD bth, BattleModel bm) {
 		this.c = c;
 		this.bth = bth;
@@ -39,6 +39,14 @@ public class CombatGameState extends BasicGameState{
 
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
+		if(this.bm.getPkmn().gethp() <= 0) {
+			this.c.getGame().enterState(MapGameState.ID);
+		}
+		if(this.c.getP1().isPlaterTurn()) {
+			this.bm.getPkmn().sethp((int) (this.bm.getPkmn().gethp() - c.getP1().getPkmns().get(0).real_Stats().Atk()));
+			this.c.getP1().setPlaterTurn(false);
+		}
+		
 		// TODO Auto-generated method stub
 		
 	}
