@@ -1,10 +1,13 @@
 package pokonline.client.modeles;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
 import pokonline.client.controleurs.AnimationControleurs;
 import pokonline.client.controleurs.MapControleurs;
+import pokonline.client.pokemon.pokemon;
 
 public class PlayerModeles {
 	private int x,y;
@@ -17,7 +20,9 @@ public class PlayerModeles {
 	private boolean moving = false;
 	private boolean leave;
 	private boolean released;
+	private boolean inbattle = false;
 	private MapModeles currentmap;
+	private ArrayList<pokemon> pkmns = new ArrayList<>();
 	private Animation animation[];
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
@@ -136,6 +141,21 @@ public class PlayerModeles {
 	}
 	public void setCurrentmap(MapModeles currentmap) {
 		this.currentmap = currentmap;
+	}
+	public boolean isInbattle() {
+		return inbattle;
+	}
+	public void setInbattle(boolean inbattle) {
+		this.inbattle = inbattle;
+	}
+	public ArrayList<pokemon> getPkmns() {
+		return pkmns;
+	}
+	public void setPkmns(ArrayList<pokemon> pkmns) {
+		this.pkmns = pkmns;
+	}
+	public void addPkmns(pokemon pkmns) {
+		this.pkmns.add(pkmns);
 	}
 	
 	

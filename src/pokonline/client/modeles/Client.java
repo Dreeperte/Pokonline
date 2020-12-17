@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.state.StateBasedGame;
 
 import pokonline.client.controleurs.MapControleurs;
 import pokonline.client.controleurs.StartingControlleur;
@@ -21,9 +22,10 @@ public class Client {
 	private boolean keypressed = false;
 	private boolean collision = false;
 	private boolean switchmap = false;
-	
+	private boolean l2 = false;
+	private StateBasedGame game;
 	public Client(String pname) {
-		this.p1 = new PlayerModeles(200,200,pname);
+		this.p1 = new PlayerModeles(600,600,pname);
 		this.cam = new CameraModeles();
 
 	}
@@ -197,6 +199,18 @@ public class Client {
 
 	public void setCollision(boolean collision) {
 		this.collision = collision;
+	}
+	public boolean isL2() {
+		return l2;
+	}
+	public void setL2(boolean l2) {
+		this.l2 = l2;
+	}
+	public StateBasedGame getGame() {
+		return game;
+	}
+	public void setGame(StateBasedGame game) {
+		this.game = game;
 	}
 
 

@@ -14,10 +14,15 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.util.BufferedImageUtil;
 
 import pokonline.client.controleurs.AnimationControleurs;
+import pokonline.client.pokemon.STATS;
+import pokonline.client.pokemon.base_pkmn;
+import pokonline.client.pokemon.pokemon;
+import pokonline.client.pokemon.type;
 
 public class AssetManager {
 	static Image stone, grass;
 	public static TrueTypeFont ttf;
+	public static pokemon bpkmnVenusaur,bpkmnCharizard,bpkmnBlastoise,bpkmnButterfree;
 	public AssetManager() {
 	}
 	
@@ -25,13 +30,39 @@ public class AssetManager {
     	try {
 			grass = new Image("texture/Grass.png");
 			stone = new Image("texture/Stone.png");
-			Font font = new Font("font/Pokemon_GB.ttf", Font.BOLD, 32);
+			Font font = new Font("font/Pokemon_GB.ttf", Font.BOLD, 16);
 			ttf = new TrueTypeFont(font, true);
 			AnimationControleurs.loadSpriteSheet();
+			loadpokemon();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
     	
+	}
+	
+	public static void loadpokemon() {
+		type bug = new type("bug");
+		type dark = new type("dark");
+		type dragon = new type("dragon");
+		type electric = new type("electric");
+		type fairy = new type("fairy");
+		type fighting = new type("fighting");
+		type fire = new type("fire");
+		type flying = new type("flying");
+		type ghost = new type("ghost");
+		type grass = new type("grass");
+		type ground = new type("ground");
+		type ice = new type("ice");
+		type normal = new type("normal");
+		type poison = new type("poison");
+		type psychic = new type("psychic");
+		type rock =new type("rock");
+		type steel = new type("steel");
+		type water = new type("water");
+		bpkmnVenusaur = new pokemon(new base_pkmn("Venusaur",new STATS(80,82,83,100,100,80),grass,poison));
+		bpkmnCharizard = new pokemon(new base_pkmn("Charizard",new STATS(78,84,78,109,85,100),fire,flying));
+		bpkmnBlastoise = new pokemon(new base_pkmn("Blastoise",new STATS(79,83,100,85,105,78),water));
+		bpkmnButterfree = new pokemon(new base_pkmn("Butterfree",new STATS(60,45,50,90,80,70),bug,flying));
 	}
 	
 	public static Image loadImage(String path) 
