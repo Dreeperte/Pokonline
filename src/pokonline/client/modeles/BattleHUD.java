@@ -20,7 +20,7 @@ public class BattleHUD implements ComponentListener {
 		this.init(container);
 	}
 	private void init(GameContainer container) {
-		Image button = AssetManager.loadImage("texture/button.png");
+		Image button = AssetManager.button;
 		setSwitchpoke(new MouseOverArea(container, button, container.getWidth()-(button.getWidth()+SPACE), container.getHeight() - (button.getHeight() + SPACE),this));
 		setAttack(new MouseOverArea(container, button, container.getWidth()-(button.getWidth()*2+SPACE), container.getHeight() - (button.getHeight() + SPACE),this));
 		setFlee(new MouseOverArea(container, button, container.getWidth()-(button.getWidth()*2+SPACE), container.getHeight() - (button.getHeight()*2 + SPACE),this));
@@ -33,6 +33,7 @@ public class BattleHUD implements ComponentListener {
 			System.out.println("switch poke !");
 		}
 		else if(source == this.attack) {
+			this.c.getP1().setPlaterTurn(true);
 			System.out.println("Attack !");
 		}
 		else if(source == this.flee) {

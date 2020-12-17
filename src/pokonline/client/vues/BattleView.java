@@ -8,7 +8,7 @@ import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.PlayerModeles;
-import pokonline.server.models.PlayerModel;
+
 
 public class BattleView {
 	private static Image img = AssetManager.loadImage("texture/background.png");
@@ -19,7 +19,8 @@ public class BattleView {
 		BattleHUDView.render(bth, g, container);
 		g.drawImage(bm.getPkmn().getFront(), x-(bm.getPkmn().getFront().getWidth()/2), y-(bm.getPkmn().getFront().getHeight()));
 		g.drawImage(p1.getPkmns().get(0).getBack(), 0, 896-p1.getPkmns().get(0).getBack().getHeight());
-		
+		PokemonHudView.renderEnemy(bm.getPkmn(), g, container);
+		PokemonHudView.renderAlly(p1.getPkmns().get(0), g, container);
 	}
 
 }

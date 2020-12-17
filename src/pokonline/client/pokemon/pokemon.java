@@ -5,11 +5,11 @@ import org.newdawn.slick.Image;
 
 import pokonline.client.modeles.AssetManager;
 
-public class pokemon {
+public class pokemon implements Cloneable{
 	private base_pkmn bpkmn; //species
 	private String name; //name, by default the species one
 	private int Lvl=(int)Math.random()%5;
-	private int hp;
+	private int hp ,maxhp;
 	private sexe sexe=null;
 	private String dO=null;
 	private float nId;
@@ -29,6 +29,7 @@ public class pokemon {
 		bpkmn=b;
 		this.name = b.name();
 		this.hp = (int)real_Stats().HP();
+		this.maxhp = (int)real_Stats().HP();
 		
 		back = AssetManager.loadImage("texture/pokemon/" + b.name() + "Back.png");
 		front = AssetManager.loadImage("texture/pokemon/" + b.name() + "Front.png");
@@ -37,6 +38,16 @@ public class pokemon {
 			sexe=new sexe((int)Math.random()%2);
 		expnLVL();
 	}
+	public Object clone() {
+		try {
+			return super.clone();
+		} catch (CloneNotSupportedException e) {
+
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public pokemon(base_pkmn b,Image front, Image back ,int Lvl,boolean legend){
 		bpkmn=b;
 		if (b.havesex())
@@ -116,5 +127,17 @@ public class pokemon {
 	}
 	public void setFront(Image front) {
 		this.front = front;
+	}
+	public int getMaxhp() {
+		return maxhp;
+	}
+	public void setMaxhp(int maxhp) {
+		this.maxhp = maxhp;
+	}
+	public int gethp() {
+		return this.hp;
+	}
+	public void sethp(int hp) {
+		this.hp = hp;
 	}
 }
