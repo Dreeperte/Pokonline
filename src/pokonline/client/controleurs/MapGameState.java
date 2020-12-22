@@ -1,5 +1,7 @@
 package pokonline.client.controleurs;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
@@ -12,6 +14,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
+import pokonline.client.pokemon.pokemon;
 import pokonline.client.vues.WorldView;
 
 public class MapGameState extends BasicGameState{
@@ -20,7 +23,7 @@ public class MapGameState extends BasicGameState{
 	private BattleModel bm;
 	public static Object lock = new Object();
 	private int tick = 0;
-	public static int ID= 0;
+	public static int ID= 1;
 
 	public MapGameState(Client c,BattleHUD bth, BattleModel bm) 
 	{
@@ -33,6 +36,7 @@ public class MapGameState extends BasicGameState{
 	@Override
 	public void init(GameContainer container, StateBasedGame state) throws SlickException {
 		this.c.setGame(state);
+
 		// TODO Auto-generated method stub
 		
 	}
@@ -97,7 +101,7 @@ public class MapGameState extends BasicGameState{
 	                int int_random = rand.nextInt(upperbound);
 	                if(int_random < 10) {
 	                	int index = (int) (Math.random()*(this.c.getP1().getCurrentmap().getPkmns().size()));
-	                	this.bm.setPkmn(this.c.getP1().getCurrentmap().getPkmns().get(index));
+	                	this.bm.setPkmn((pokemon)this.c.getP1().getCurrentmap().getPkmns().get(index).clone());
 	                	this.c.getGame().enterState(CombatGameState.ID);
 	                	//this.c.getP1().setInbattle(true);
 	                	this.c.getP1().setMoving(false);

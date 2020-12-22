@@ -21,6 +21,7 @@ public class PlayerModeles {
 	private boolean leave;
 	private boolean released;
 	private boolean inbattle = false;
+	private boolean platerTurn = false;
 	private MapModeles currentmap;
 	private ArrayList<pokemon> pkmns = new ArrayList<>();
 	private Animation animation[];
@@ -156,6 +157,12 @@ public class PlayerModeles {
 	}
 	public void addPkmns(pokemon pkmns) {
 		this.pkmns.add(pkmns);
+	}
+	public boolean isPlaterTurn() {
+		return platerTurn;
+	}
+	public void setPlaterTurn(boolean platerTurn) {
+		this.platerTurn = platerTurn;
 	}
 	
 	

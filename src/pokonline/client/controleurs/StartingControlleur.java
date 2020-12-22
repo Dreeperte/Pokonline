@@ -16,6 +16,8 @@ import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
+import pokonline.client.modeles.MainScreen;
+import pokonline.client.pokemon.pokemon;
 
 public class StartingControlleur extends StateBasedGame{
 
@@ -55,28 +57,18 @@ public class StartingControlleur extends StateBasedGame{
 		container.setVSync(true);
 		//container.setFullscreen(true);
 		AssetManager.loadTexture();
+		
+		//LOAD MAIN SCREEN
 		bth = new BattleHUD(container);
 		c = new Client(pname);
 		bth.setClient(c);
 		c.getP1().setCurrentmap(MapControleurs.m1);
+		MainScreen ms = new MainScreen(container, c);
+		
 		MapControleurs.initMap();
 		bm  = new BattleModel(c.getP1().getCurrentmap());
-		c.getP1().addPkmns(AssetManager.bpkmnVenusaur);
-        Thread t = new Thread(new Runnable() {
-            public void run() {
-            	try {
-					c.StartClient();
-				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        
-        });
-        t.start();
+		c.getP1().addPkmns((pokemon) AssetManager.bpkmnVenusaur.clone());
+		addState(new MainScreenState(ms, c));
         addState(new MapGameState(c,bth,bm));
         addState(new CombatGameState(c,bth,bm));
 		// TODO Auto-generated method stub

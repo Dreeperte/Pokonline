@@ -24,6 +24,7 @@ public class Client {
 	private boolean switchmap = false;
 	private boolean l2 = false;
 	private StateBasedGame game;
+	private String connect = "localhost";
 	public Client(String pname) {
 		this.p1 = new PlayerModeles(600,600,pname);
 		this.cam = new CameraModeles();
@@ -34,7 +35,7 @@ public class Client {
 	}
 	public void StartClient() throws UnknownHostException, IOException {
 		
-		Socket sock = new Socket("151.80.155.244", 5015);
+		Socket sock = new Socket(connect, 5015);
 		PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
 		
 		Thread t = new Thread(new Runnable() {
@@ -211,6 +212,12 @@ public class Client {
 	}
 	public void setGame(StateBasedGame game) {
 		this.game = game;
+	}
+	public String getConnect() {
+		return connect;
+	}
+	public void setConnect(String connect) {
+		this.connect = connect;
 	}
 
 

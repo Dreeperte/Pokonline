@@ -20,7 +20,7 @@ import pokonline.client.pokemon.pokemon;
 import pokonline.client.pokemon.type;
 
 public class AssetManager {
-	static Image stone, grass;
+	static Image stone, grass, button;
 	public static TrueTypeFont ttf;
 	public static pokemon bpkmnVenusaur,bpkmnCharizard,bpkmnBlastoise,bpkmnButterfree;
 	public AssetManager() {
@@ -30,6 +30,7 @@ public class AssetManager {
     	try {
 			grass = new Image("texture/Grass.png");
 			stone = new Image("texture/Stone.png");
+			button = AssetManager.loadImage("texture/button.png");
 			Font font = new Font("font/Pokemon_GB.ttf", Font.BOLD, 16);
 			ttf = new TrueTypeFont(font, true);
 			AnimationControleurs.loadSpriteSheet();
