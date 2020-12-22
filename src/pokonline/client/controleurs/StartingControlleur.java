@@ -16,6 +16,7 @@ import pokonline.client.modeles.AssetManager;
 import pokonline.client.modeles.BattleHUD;
 import pokonline.client.modeles.BattleModel;
 import pokonline.client.modeles.Client;
+import pokonline.client.modeles.Inventory;
 import pokonline.client.modeles.MainScreen;
 import pokonline.client.pokemon.pokemon;
 
@@ -63,6 +64,9 @@ public class StartingControlleur extends StateBasedGame{
 		c = new Client(pname);
 		bth.setClient(c);
 		c.getP1().setCurrentmap(MapControleurs.m1);
+		Inventory inventaire = new Inventory(container,c);
+		inventaire.addItems(AssetManager.masterball);
+		c.getP1().setInventaire(inventaire);
 		MainScreen ms = new MainScreen(container, c);
 		
 		MapControleurs.initMap();
@@ -71,6 +75,7 @@ public class StartingControlleur extends StateBasedGame{
 		addState(new MainScreenState(ms, c));
         addState(new MapGameState(c,bth,bm));
         addState(new CombatGameState(c,bth,bm));
+        addState(new InventoryGameState(c));
 		// TODO Auto-generated method stub
 		
 	}

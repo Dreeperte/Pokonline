@@ -36,6 +36,7 @@ public class AssetManager {
 			ttf = new TrueTypeFont(font, true);
 			AnimationControleurs.loadSpriteSheet();
 			loadpokemon();
+			loadItems();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

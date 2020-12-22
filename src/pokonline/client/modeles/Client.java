@@ -23,6 +23,7 @@ public class Client {
 	private boolean collision = false;
 	private boolean switchmap = false;
 	private boolean l2 = false;
+	private boolean InInventory = false;
 	private StateBasedGame game;
 	private String connect = "localhost";
 	public Client(String pname) {
@@ -218,6 +219,12 @@ public class Client {
 	}
 	public void setConnect(String connect) {
 		this.connect = connect;
+	}
+	public boolean isInInventory() {
+		return InInventory;
+	}
+	public void setInInventory(boolean inInventory) {
+		InInventory = inInventory;
 	}
 
 

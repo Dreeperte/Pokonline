@@ -6,6 +6,7 @@ import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.MouseOverArea;
 
+import pokonline.client.controleurs.InventoryGameState;
 import pokonline.client.controleurs.MapGameState;
 
 public class BattleHUD implements ComponentListener {
@@ -41,6 +42,8 @@ public class BattleHUD implements ComponentListener {
 			//System.out.println("flee !");
 		}
 		else if(source == this.bag) {
+			this.c.setInInventory(true);
+			this.c.getGame().enterState(InventoryGameState.ID);
 			System.out.println("open bag !");
 		}
 		

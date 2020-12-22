@@ -46,12 +46,11 @@ public class pokemon implements Cloneable{
 			this.sound = new Sound("sounds/cry/" + b.name()+".ogg");
 			temp = new SpriteSheet("texture/pokemon/front/"+ b.name()+".png", 64, 64);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		front = AnimationModeles.loadAnimationPoke(temp, 0,temp.getWidth()/64, 0, this);
-		this.last = front.getImage(front.getFrameCount()-2);
+		this.last = front.getImage(front.getFrameCount()-1);
 		this.last.setFilter(Image.FILTER_NEAREST);
 		if (b.havesex())
 			sexe=new sexe((int)Math.random()%2);
