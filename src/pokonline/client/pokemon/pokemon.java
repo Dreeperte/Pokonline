@@ -1,8 +1,14 @@
 package pokonline.client.pokemon;
 import java.util.Date;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+import org.newdawn.slick.SpriteSheet;
 
+
+import pokonline.client.modeles.AnimationModeles;
 import pokonline.client.modeles.AssetManager;
 
 public class pokemon implements Cloneable{
@@ -20,7 +26,10 @@ public class pokemon implements Cloneable{
 	private Date date=new Date();
 	private String Location=null;
 	private Image back;
-	private Image front;
+	private Image last;
+	private Sound sound;
+	private Animation front;
+	private int duration;
 	private STATS Iv=new STATS(0,0,0,0,0,0),
 			Ev=new STATS(0,0,0,0,0,0);
 	
@@ -30,10 +39,20 @@ public class pokemon implements Cloneable{
 		this.name = b.name();
 		this.hp = (int)real_Stats().HP();
 		this.maxhp = (int)real_Stats().HP();
-		back = AssetManager.loadImage("texture/pokemon/" + b.name() + "Back.png");
+		back = AssetManager.loadImage("texture/pokemon/back/" + b.name() + ".png");
 		back.setFilter(Image.FILTER_NEAREST);
-		front = AssetManager.loadImage("texture/pokemon/" + b.name() + "Front.png");
-		front.setFilter(Image.FILTER_NEAREST);
+		SpriteSheet temp = null;
+		try {
+			this.sound = new Sound("sounds/cry/" + b.name()+".ogg");
+			temp = new SpriteSheet("texture/pokemon/front/"+ b.name()+".png", 64, 64);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		front = AnimationModeles.loadAnimationPoke(temp, 0,temp.getWidth()/64, 0, this);
+		this.last = front.getImage(front.getFrameCount()-2);
+		this.last.setFilter(Image.FILTER_NEAREST);
 		if (b.havesex())
 			sexe=new sexe((int)Math.random()%2);
 		expnLVL();
@@ -122,10 +141,10 @@ public class pokemon implements Cloneable{
 	public void setBack(Image back) {
 		this.back = back;
 	}
-	public Image getFront() {
+	public Animation getFront() {
 		return front;
 	}
-	public void setFront(Image front) {
+	public void setFront(Animation front) {
 		this.front = front;
 	}
 	public int getMaxhp() {
@@ -139,5 +158,23 @@ public class pokemon implements Cloneable{
 	}
 	public void sethp(int hp) {
 		this.hp = hp;
+	}
+	public Image getLast() {
+		return last;
+	}
+	public void setLast(Image last) {
+		this.last = last;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public Sound getSound() {
+		return sound;
+	}
+	public void setSound(Sound sound) {
+		this.sound = sound;
 	}
 }

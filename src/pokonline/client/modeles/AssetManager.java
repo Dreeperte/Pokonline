@@ -22,7 +22,8 @@ import pokonline.client.pokemon.type;
 public class AssetManager {
 	static Image stone, grass, button;
 	public static TrueTypeFont ttf;
-	public static pokemon bpkmnVenusaur,bpkmnCharizard,bpkmnBlastoise,bpkmnButterfree;
+	public static pokemon bpkmnAltaria, bpkmnGalie;
+	public static Item masterball;
 	public AssetManager() {
 	}
 	
@@ -60,12 +61,14 @@ public class AssetManager {
 		type rock =new type("rock");
 		type steel = new type("steel");
 		type water = new type("water");
-		bpkmnVenusaur = new pokemon(new base_pkmn("Venusaur",new STATS(80,82,83,100,100,80),grass,poison));
-		bpkmnCharizard = new pokemon(new base_pkmn("Charizard",new STATS(78,84,78,109,85,100),fire,flying));
-		bpkmnBlastoise = new pokemon(new base_pkmn("Blastoise",new STATS(79,83,100,85,105,78),water));
-		bpkmnButterfree = new pokemon(new base_pkmn("Butterfree",new STATS(60,45,50,90,80,70),bug,flying));
+		bpkmnAltaria = new pokemon(new base_pkmn("Azurill",new STATS(80,82,83,100,100,80),grass,poison));
+		bpkmnGalie = new pokemon(new base_pkmn("Glalie",new STATS(78,84,78,109,85,100),fire,flying));
+		//bpkmnBlastoise = new pokemon(new base_pkmn("Blastoise",new STATS(79,83,100,85,105,78),water));
+		//bpkmnButterfree = new pokemon(new base_pkmn("Butterfree",new STATS(60,45,50,90,80,70),bug,flying));
 	}
-	
+	public static void loadItems() {
+		masterball  = new PokeBall(1,1,AssetManager.loadImage("texture/Items/masterball.png"),"master ball");
+	}
 	public static Image loadImage(String path) 
 	{
 	    BufferedImage bufferedImage = null;

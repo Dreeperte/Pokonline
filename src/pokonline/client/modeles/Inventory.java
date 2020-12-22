@@ -13,5 +13,8 @@ public class Inventory {
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
+	public void addItems(Item item) {
+		this.items.add(item);
+	}
 
 }

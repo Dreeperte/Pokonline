@@ -13,7 +13,7 @@ public class MapControleurs {
 	public static MapModeles m4 = new MapModeles("grotted1.tmx","grotted1",false);
 	
 	public static void initMap() {
-		m1.addPkmns(AssetManager.bpkmnVenusaur);m1.addPkmns(AssetManager.bpkmnButterfree);m1.addPkmns(AssetManager.bpkmnCharizard);m1.addPkmns(AssetManager.bpkmnBlastoise);
+		m1.addPkmns(AssetManager.bpkmnAltaria);m1.addPkmns(AssetManager.bpkmnGalie);
 		
 	}
 	

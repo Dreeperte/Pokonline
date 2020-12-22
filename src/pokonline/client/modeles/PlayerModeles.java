@@ -25,6 +25,7 @@ public class PlayerModeles {
 	private MapModeles currentmap;
 	private ArrayList<pokemon> pkmns = new ArrayList<>();
 	private Animation animation[];
+	private Inventory inventaire;
 	public PlayerModeles(int x, int y, String name) {
 		this.x = x;
 		this.y = y;
@@ -163,6 +164,12 @@ public class PlayerModeles {
 	}
 	public void setPlaterTurn(boolean platerTurn) {
 		this.platerTurn = platerTurn;
+	}
+	public Inventory getInventaire() {
+		return inventaire;
+	}
+	public void setInventaire(Inventory inventaire) {
+		this.inventaire = inventaire;
 	}
 	
 	
