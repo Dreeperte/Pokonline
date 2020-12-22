@@ -67,7 +67,7 @@ public class StartingControlleur extends StateBasedGame{
 		
 		MapControleurs.initMap();
 		bm  = new BattleModel(c.getP1().getCurrentmap());
-		c.getP1().addPkmns((pokemon) AssetManager.bpkmnVenusaur.clone());
+		c.getP1().addPkmns((pokemon) AssetManager.bpkmnAltaria.clone());
 		addState(new MainScreenState(ms, c));
         addState(new MapGameState(c,bth,bm));
         addState(new CombatGameState(c,bth,bm));

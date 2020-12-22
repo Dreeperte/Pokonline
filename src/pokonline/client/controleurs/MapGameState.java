@@ -102,7 +102,9 @@ public class MapGameState extends BasicGameState{
 	                if(int_random < 10) {
 	                	int index = (int) (Math.random()*(this.c.getP1().getCurrentmap().getPkmns().size()));
 	                	this.bm.setPkmn((pokemon)this.c.getP1().getCurrentmap().getPkmns().get(index).clone());
-	                	this.c.getGame().enterState(CombatGameState.ID);
+
+	                	int duration = this.bm.getPkmn().getDuration();
+	                	this.c.getGame().enterState(CombatGameState.getIDload(duration));
 	                	//this.c.getP1().setInbattle(true);
 	                	this.c.getP1().setMoving(false);
 	                	//System.out.println("BATTLE!");
