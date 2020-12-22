@@ -1,9 +1,24 @@
 package pokonline.client.vues;
 
-public class InventoryView {
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
-	public InventoryView() {
-		// TODO Auto-generated constructor stub
+import pokonline.client.modeles.AssetManager;
+import pokonline.client.modeles.Inventory;
+import pokonline.client.modeles.Item;
+
+public class InventoryView {
+	private static Image img = AssetManager.loadImage("texture/inventoryBackGround.png"); 
+	public static void render(Graphics g, GameContainer container,Inventory inventory) {
+		g.resetTransform();
+		g.drawImage(img, 0, 0);
+		int x = 0, y = 0;
+		for(Item i : inventory.getItems()) {
+			g.drawImage(i.getItemImage().getScaledCopy(4), x, y);
+			y += i.getItemImage().getHeight()*4;
+		}
+
 	}
 
 }

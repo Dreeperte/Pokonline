@@ -13,6 +13,8 @@ public abstract class Item {
 		this.price = price;
 		this.itemImage = itemImage;
 		this.name = name;
+		this.itemImage.setFilter(Image.FILTER_NEAREST);
+		
 	}
 	public int getQuantity() {
 		return quantity;

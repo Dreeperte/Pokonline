@@ -23,6 +23,7 @@ public class AssetManager {
 	static Image stone, grass, button;
 	public static TrueTypeFont ttf;
 	public static pokemon bpkmnVenusaur,bpkmnCharizard,bpkmnBlastoise,bpkmnButterfree;
+	public static Item masterball;
 	public AssetManager() {
 	}
 	
@@ -65,7 +66,9 @@ public class AssetManager {
 		bpkmnBlastoise = new pokemon(new base_pkmn("Blastoise",new STATS(79,83,100,85,105,78),water));
 		bpkmnButterfree = new pokemon(new base_pkmn("Butterfree",new STATS(60,45,50,90,80,70),bug,flying));
 	}
-	
+	public static void loadItems() {
+		masterball  = new PokeBall(1,1,AssetManager.loadImage("texture/Items/masterball.png"),"master ball");
+	}
 	public static Image loadImage(String path) 
 	{
 	    BufferedImage bufferedImage = null;
